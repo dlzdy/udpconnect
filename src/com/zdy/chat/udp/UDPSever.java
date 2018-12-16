@@ -6,7 +6,7 @@ import java.net.DatagramSocket;
 
 public class UDPSever {
 	public static void main(String[] args) throws IOException {
-		DatagramSocket socket = new DatagramSocket(80);
+		DatagramSocket socket = new DatagramSocket(8800);
 		System.out.println("服务器即将启动，等待客户端的连接");
 		byte[] data = new byte[1024];// 创建字节数组，指定接收的数据包的大小
 		int count = 0;
