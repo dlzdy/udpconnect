@@ -42,7 +42,7 @@ public class UDPServerThread extends Thread {
                 e.printStackTrace();
             }
             try {
-				Thread.sleep(60000);
+				Thread.sleep(25000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
