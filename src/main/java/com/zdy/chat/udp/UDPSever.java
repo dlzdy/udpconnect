@@ -15,7 +15,7 @@ public class UDPSever {
 		int count = 0;
 		while (true) {
 			DatagramPacket packet = new DatagramPacket(data, data.length);
-			socket.receive(packet);
+			socket.receive(packet);// 阻塞****
 			if(!udpMap.containsKey(packet.getSocketAddress().toString())) {
 				udpMap.put(packet.getSocketAddress().toString(), packet);
 				// 此方法在接收到数据报之前会一直阻塞

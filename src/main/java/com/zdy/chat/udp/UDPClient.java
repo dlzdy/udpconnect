@@ -9,7 +9,7 @@ public class UDPClient {
 
 	public static void main(String[] args) throws IOException {
 		// 3.创建DatagramSocket对象
-		DatagramSocket socket = new DatagramSocket();
+		final DatagramSocket socket = new DatagramSocket();
 		new Thread() {
 			public void run() {
 				try {
