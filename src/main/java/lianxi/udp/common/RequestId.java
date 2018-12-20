@@ -1,11 +1,11 @@
-package lianxi.tcp.common;
+package lianxi.udp.common;
 
 import java.util.UUID;
 
 public class RequestId {
 	//简单UUID 64
 	public static String next() {
-		return UUID.randomUUID().toString().replace("-", "");
+		return UUID.randomUUID().toString();
 	}
 
 }
