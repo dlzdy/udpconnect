@@ -17,7 +17,7 @@ import io.netty.channel.socket.nio.NioDatagramChannel;
  * @version 版   本  号：1.0.<br/>
  *          创建时间：2018年1月8日 上午10:03:38
  */
-public class UdpServer {
+public class UdpLogServer {
 
 	private final Bootstrap bootstrap;
 	private final NioEventLoopGroup acceptGroup;
@@ -36,15 +36,15 @@ public class UdpServer {
 		return channel;
 	}
 	
-	public static UdpServer getInstance(){
+	public static UdpLogServer getInstance(){
 		return UdpServerHolder.INSTANCE;
 	}
 	
 	private static final class UdpServerHolder{
-		static final UdpServer INSTANCE = new UdpServer();
+		static final UdpLogServer INSTANCE = new UdpLogServer();
 	}
 	
-	private UdpServer(){
+	private UdpLogServer(){
 		bootstrap = new Bootstrap();
 		acceptGroup = new NioEventLoopGroup();
 		bootstrap.group(acceptGroup)
@@ -55,7 +55,7 @@ public class UdpServer {
 			protected void initChannel(NioDatagramChannel ch)
 					throws Exception {
 				ChannelPipeline pipeline = ch.pipeline();
-				pipeline.addLast(new UdpServerHandler());
+				pipeline.addLast(new UdpLogServerHandler());
 			}
 		});
 	}

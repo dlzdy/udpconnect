@@ -17,9 +17,9 @@ import org.apache.log4j.Logger;
  * @version 版   本  号：1.0.<br/>
  *          创建时间：2018年1月8日 上午10:09:47
  */
-public class UdpServerHandler extends SimpleChannelInboundHandler<DatagramPacket>{
+public class UdpLogServerHandler extends SimpleChannelInboundHandler<DatagramPacket>{
 
-	private static final Logger logger = Logger.getLogger(UdpServerHandler.class);
+	private static final Logger logger = Logger.getLogger(UdpLogServerHandler.class);
 	
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg)

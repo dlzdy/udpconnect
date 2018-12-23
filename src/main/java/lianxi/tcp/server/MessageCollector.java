@@ -22,7 +22,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 @Sharable             //标注一个channel handler可以被多个channel安全地共享。
 public class MessageCollector extends ChannelInboundHandlerAdapter {
 
-	private final static Logger LOG = LoggerFactory.getLogger(MessageCollector.class);
+	private final static Logger logger = LoggerFactory.getLogger(MessageCollector.class);
 	//业务线程池
 	private ThreadPoolExecutor executor;
 	private MessageHandlers handlers;
@@ -66,13 +66,13 @@ public class MessageCollector extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		//客户端来了一个新的连接
-		LOG.debug("connection comes");
+		logger.info("connection comes");
 	}
 
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 		//客户端走了一个
-		LOG.debug("connection leaves");
+		logger.info("connection leaves");
 	}
 
 	@Override
@@ -82,6 +82,8 @@ public class MessageCollector extends ChannelInboundHandlerAdapter {
 			this.executor.execute(() -> {
 				this.handleMessage(ctx, (MessageInput) msg);
 			});
+		}else {
+			logger.error(msg.toString());
 		}
 	}
 
@@ -109,7 +111,7 @@ public class MessageCollector extends ChannelInboundHandlerAdapter {
 		//此处可能因为客户机器突发重启
 		//也可能客户端连接时间超时,后面的REadTimeoutHandle抛出异常
 		//也可能消息协议错误,序列化异常
-		LOG.warn("connection error", cause);
+		logger.warn("connection error", cause);
 	}
 
 }

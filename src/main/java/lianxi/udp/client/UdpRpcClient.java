@@ -2,19 +2,24 @@ package lianxi.udp.client;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.alibaba.fastjson.JSON;
 import com.zdy.netty.logudp.LogPushUdpClient;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
@@ -24,6 +29,8 @@ import io.netty.channel.socket.DatagramPacket;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.MessageToMessageDecoder;
+import io.netty.handler.codec.MessageToMessageEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleStateHandler;
@@ -33,6 +40,7 @@ import lianxi.tcp.client.MessageCollector;
 import lianxi.tcp.client.RPCClient;
 import lianxi.tcp.client.RPCException;
 import lianxi.tcp.client.RpcFuture;
+import lianxi.tcp.common.Charsets;
 import lianxi.tcp.common.MessageDecoder;
 import lianxi.tcp.common.MessageEncoder;
 import lianxi.tcp.common.MessageOutput;
@@ -83,11 +91,11 @@ public class UdpRpcClient {
 		bootstrap.option(ChannelOption.SO_BROADCAST, true);
 		// 4.配置handler和childHandler，数据处理器。
 		collector = new UdpMessageCollector(this);
-		bootstrap.handler(new LoggingHandler(LogLevel.INFO));
-		bootstrap.handler(new ChannelInitializer<SocketChannel>() {
+		//bootstrap.handler(new LoggingHandler(LogLevel.INFO));
+		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
 
 			@Override
-			protected void initChannel(SocketChannel ch) throws Exception {
+			protected void initChannel(NioDatagramChannel ch) throws Exception {
 				// 注册hander
 				ChannelPipeline pipe = ch.pipeline();
 				// 如果客户端30秒没有任何请求,就关闭客户端连接
@@ -102,6 +110,35 @@ public class UdpRpcClient {
 			}
 
 		});
+		
+//		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
+//
+//			@Override
+//			public void channelActive(ChannelHandlerContext ctx) throws Exception {
+//				super.channelActive(ctx);
+//			}
+//
+//			@Override
+//			protected void initChannel(NioDatagramChannel ch) throws Exception {
+//				ChannelPipeline cp = ch.pipeline();
+//				cp.addLast(new MessageToMessageDecoder<DatagramPacket>() {
+//					@Override
+//					protected void decode(ChannelHandlerContext ctx, DatagramPacket msg, List<Object> out)
+//							throws Exception {
+//						out.add(msg.content().toString(Charset.forName("UTF-8")));
+//					}
+//				});
+//				
+//				cp.addLast(new MessageToMessageEncoder<DatagramPacket>() {
+//					@Override
+//					protected void encode(ChannelHandlerContext ctx, DatagramPacket msg, List<Object> out)
+//							throws Exception {
+//						out.add(msg.content().toString(Charset.forName("UTF-8")));						
+//					}
+//				});				
+//				// cp.addLast("handler", new UdpServerHandler());
+//			}
+//		});		
 	}
 
 	/**
@@ -128,24 +165,46 @@ public class UdpRpcClient {
 		// System.out.println("out of time");
 		// }
 		//channel.closeFuture().await(1000);
-		if(!channel.closeFuture().await(15000)){
+
+		InetSocketAddress inetSocketAddress = new InetSocketAddress(serverName, serverPort);
+		
+		String requestId = RequestId.next();
+		MessageOutput output = new MessageOutput(requestId, "heartbeat", "");
+		ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
+		writeStr(buf, output.getRequestId());
+		writeStr(buf, output.getType());
+		writeStr(buf, JSON.toJSONString(output.getPayload()));
+		
+		DatagramPacket datagramPacket = new DatagramPacket(buf, inetSocketAddress);
+		
+//		channel.writeAndFlush(datagramPacket).addListener(new GenericFutureListener<ChannelFuture>() {
+//			public void operationComplete(ChannelFuture future) throws Exception {
+//				boolean success = future.isSuccess();
+//				if (logger.isInfoEnabled()) {
+//					logger.info("Sender datagramPacket result : " + success);
+//				}
+//			}
+//		});
+		
+        channel.writeAndFlush(datagramPacket).sync();
+        if (!channel.closeFuture().await(3000)) {
+            logger.info("查询超时");
+        }
+		
+		if(!channel.closeFuture().await(5000)){
 			System.out.println("查询超时");
 		}
-		InetSocketAddress inetSocketAddress = new InetSocketAddress(serverName, serverPort);
-		DatagramPacket datagramPacket = new DatagramPacket(Unpooled.copiedBuffer("heartbeat".getBytes()),
-				inetSocketAddress);
-		channel.writeAndFlush(datagramPacket).addListener(new GenericFutureListener<ChannelFuture>() {
-			public void operationComplete(ChannelFuture future) throws Exception {
-				boolean success = future.isSuccess();
-				if (logger.isInfoEnabled()) {
-					logger.info("Sender datagramPacket result : " + success);
-				}
-			}
-		});
 		started = true;
 
+//		String requestId = RequestId.next();
+//		MessageOutput output = new MessageOutput(requestId, "heartbeat", "");
+//		//MessageOutput output = new MessageOutput(requestId, "fib", 1);
+//		channel.writeAndFlush(output);
 	}
-
+	private void writeStr(ByteBuf buf, String s) {
+		buf.writeInt(s.length());
+		buf.writeBytes(s.getBytes(Charsets.UTF8));
+	}
 	public void reconnect() {
 		// if (stopped) {
 		// return;

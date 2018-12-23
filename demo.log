@@ -260,3 +260,91 @@
 2018-12-23 19:56:00,096 [main] [io.netty.bootstrap.ServerBootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x2e18a4c3]'
 2018-12-23 19:56:11,890 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
 2018-12-23 19:56:18,099 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 21:01:03,875 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 21:01:11,566 [nioEventLoopGroup-3-1] [org.zln.netty.five.part07.UdpClientHandler] [INFO] - 谚语查询结果:洛阳亲友如相问,一片冰心在玉壶
+2018-12-23 21:01:34,369 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 21:01:34,410 [nioEventLoopGroup-3-1] [org.zln.netty.five.part07.UdpClientHandler] [INFO] - 谚语查询结果:一寸光阴一寸金,寸金难买寸光阴
+2018-12-23 21:02:17,432 [nioEventLoopGroup-2-1] [org.zln.netty.five.part07.UdpClientHandler] [INFO] - 谚语查询结果:洛阳亲友如相问,一片冰心在玉壶
+2018-12-23 21:05:45,921 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x6e80eb51]'
+2018-12-23 21:06:20,497 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0xfdefe520]'
+2018-12-23 21:06:35,620 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 21:08:12,156 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x0f1e854e]'
+2018-12-23 21:09:15,563 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0xe7b4d5fc]'
+2018-12-23 21:53:12,075 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x030ac1e0]'
+2018-12-23 21:53:36,801 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 21:54:12,947 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 21:54:40,020 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x11e3b232]'
+2018-12-23 21:55:26,317 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x1c84cb53]'
+2018-12-23 22:05:48,877 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:20:19,658 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:20:49,677 [nioEventLoopGroup-2-1] [org.zln.netty.five.part07.UdpClientHandler] [INFO] - 谚语查询结果:老骥伏枥,志在千里.烈士暮年,壮心不已!
+2018-12-23 22:21:21,378 [nioEventLoopGroup-2-1] [io.netty.channel.ChannelInitializer] [WARN] - Failed to initialize a channel. Closing: [id: 0xf9555750]
+java.lang.ClassCastException: io.netty.channel.socket.nio.NioDatagramChannel cannot be cast to io.netty.channel.socket.SocketChannel
+	at lianxi.udp.server.UdpRpcServer$1.initChannel(UdpRpcServer.java:1)
+	at io.netty.channel.ChannelInitializer.initChannel(ChannelInitializer.java:115)
+	at io.netty.channel.ChannelInitializer.handlerAdded(ChannelInitializer.java:107)
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAdded0(DefaultChannelPipeline.java:637)
+	at io.netty.channel.DefaultChannelPipeline.access$000(DefaultChannelPipeline.java:46)
+	at io.netty.channel.DefaultChannelPipeline$PendingHandlerAddedTask.execute(DefaultChannelPipeline.java:1487)
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAddedForAllHandlers(DefaultChannelPipeline.java:1161)
+	at io.netty.channel.DefaultChannelPipeline.invokeHandlerAddedIfNeeded(DefaultChannelPipeline.java:686)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.register0(AbstractChannel.java:514)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.access$200(AbstractChannel.java:427)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe$1.run(AbstractChannel.java:486)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:404)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:474)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Unknown Source)
+2018-12-23 22:37:13,892 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:37:23,861 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:41:17,694 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:42:41,551 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:52:31,685 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-23 22:52:42,318 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:53:33,195 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:53:50,241 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:54:03,163 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:54:30,387 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:55:14,973 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:55:22,008 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-23 22:55:32,025 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:55:49,020 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-23 22:55:57,555 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:56:50,425 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-23 22:56:57,804 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:57:27,860 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-23 22:57:35,041 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 22:57:50,077 [nioEventLoopGroup-2-1] [org.zln.netty.five.part07.UdpClientHandler] [INFO] - 谚语查询结果:老骥伏枥,志在千里.烈士暮年,壮心不已!
+2018-12-23 23:04:30,211 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-23 23:04:39,971 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
+2018-12-23 23:05:01,784 [nioEventLoopGroup-2-1] [io.netty.channel.ChannelInitializer] [WARN] - Failed to initialize a channel. Closing: [id: 0xc2e2f82f]
+java.lang.ClassCastException: io.netty.channel.socket.nio.NioDatagramChannel cannot be cast to io.netty.channel.socket.SocketChannel
+	at lianxi.udp.client.UdpRpcClient$1.initChannel(UdpRpcClient.java:1)
+	at io.netty.channel.ChannelInitializer.initChannel(ChannelInitializer.java:115)
+	at io.netty.channel.ChannelInitializer.handlerAdded(ChannelInitializer.java:107)
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAdded0(DefaultChannelPipeline.java:637)
+	at io.netty.channel.DefaultChannelPipeline.access$000(DefaultChannelPipeline.java:46)
+	at io.netty.channel.DefaultChannelPipeline$PendingHandlerAddedTask.execute(DefaultChannelPipeline.java:1487)
+	at io.netty.channel.DefaultChannelPipeline.callHandlerAddedForAllHandlers(DefaultChannelPipeline.java:1161)
+	at io.netty.channel.DefaultChannelPipeline.invokeHandlerAddedIfNeeded(DefaultChannelPipeline.java:686)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.register0(AbstractChannel.java:514)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.access$200(AbstractChannel.java:427)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe$1.run(AbstractChannel.java:486)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:404)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:474)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Unknown Source)
+2018-12-23 23:06:19,761 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-23 23:07:10,198 [nioEventLoopGroup-2-1] [lianxi.udp.client.UdpRpcClient] [INFO] - Sender datagramPacket result : true
+2018-12-23 23:08:25,090 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-23 23:12:46,877 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-23 23:14:25,417 [nioEventLoopGroup-2-1] [lianxi.udp.client.UdpRpcClient] [INFO] - Sender datagramPacket result : false
+2018-12-23 23:49:32,331 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-23 23:50:31,486 [nioEventLoopGroup-2-1] [lianxi.udp.client.UdpRpcClient] [INFO] - Sender datagramPacket result : false
+2018-12-23 23:51:07,215 [nioEventLoopGroup-2-1] [lianxi.udp.client.UdpRpcClient] [INFO] - Sender datagramPacket result : false
+2018-12-23 23:59:05,397 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-24 00:00:33,706 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时

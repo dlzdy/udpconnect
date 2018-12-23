@@ -52,7 +52,7 @@ public class UdpClient {
     
     public static void main(String[] args) {
     	UdpClient client = new UdpClient();
-    	client.run(8900);
+    	//client.run(8900);
     	client.run(8800);
 	}
 }

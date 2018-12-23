@@ -22,10 +22,11 @@ public class UdpServer {
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
         try {
             Bootstrap bootstrap = new Bootstrap();
-            bootstrap.group(eventLoopGroup)
-                    .channel(NioDatagramChannel.class)
-                    .option(ChannelOption.SO_BROADCAST,true)
-                    .handler(new UdpServerHandler());
+            bootstrap.group(eventLoopGroup);
+            bootstrap.channel(NioDatagramChannel.class);
+            bootstrap.option(ChannelOption.SO_BROADCAST,true);
+            bootstrap.handler(new UdpServerHandler());
+            
             bootstrap.bind(port).sync().channel().closeFuture().await();
         } catch (InterruptedException e) {
             logger.error(e.getMessage(),e);
