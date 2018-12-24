@@ -59,6 +59,8 @@ public class UdpRpcClient {
 	private Bootstrap bootstrap;
 	//
 	private EventLoopGroup group;
+	//
+	private Channel channel;
 	// // 是否运行
 	// private boolean isRunning;
 	// // 是否连接
@@ -92,35 +94,35 @@ public class UdpRpcClient {
 		// 4.配置handler和childHandler，数据处理器。
 		collector = new UdpMessageCollector(this);
 		//bootstrap.handler(new LoggingHandler(LogLevel.INFO));
-		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
-
-			@Override
-			protected void initChannel(NioDatagramChannel ch) throws Exception {
-				// 注册hander
-				ChannelPipeline pipe = ch.pipeline();
-				// 如果客户端30秒没有任何请求,就关闭客户端连接
-				pipe.addLast(new IdleStateHandler(30, 30, 30));
-				// 加解码器
-				pipe.addLast(new MessageDecoder());
-				// 编码器
-				pipe.addLast(new MessageEncoder());
-				// 将业务处理器放到最后
-				pipe.addLast(collector);
-
-			}
-
-		});
-		
 //		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
 //
 //			@Override
-//			public void channelActive(ChannelHandlerContext ctx) throws Exception {
-//				super.channelActive(ctx);
+//			protected void initChannel(NioDatagramChannel ch) throws Exception {
+//				// 注册hander
+//				ChannelPipeline pipe = ch.pipeline();
+//				// 如果客户端30秒没有任何请求,就关闭客户端连接
+//				pipe.addLast(new IdleStateHandler(30, 30, 30));
+//				// 加解码器
+//				pipe.addLast(new MessageDecoder());
+//				// 编码器
+//				pipe.addLast(new MessageEncoder());
+//				// 将业务处理器放到最后
+//				pipe.addLast(collector);
+//
 //			}
 //
-//			@Override
-//			protected void initChannel(NioDatagramChannel ch) throws Exception {
-//				ChannelPipeline cp = ch.pipeline();
+//		});
+		
+		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
+
+			@Override
+			public void channelActive(ChannelHandlerContext ctx) throws Exception {
+				super.channelActive(ctx);
+			}
+
+			@Override
+			protected void initChannel(NioDatagramChannel ch) throws Exception {
+				ChannelPipeline cp = ch.pipeline();
 //				cp.addLast(new MessageToMessageDecoder<DatagramPacket>() {
 //					@Override
 //					protected void decode(ChannelHandlerContext ctx, DatagramPacket msg, List<Object> out)
@@ -128,7 +130,7 @@ public class UdpRpcClient {
 //						out.add(msg.content().toString(Charset.forName("UTF-8")));
 //					}
 //				});
-//				
+				cp.addLast(new MessageEncoder());				
 //				cp.addLast(new MessageToMessageEncoder<DatagramPacket>() {
 //					@Override
 //					protected void encode(ChannelHandlerContext ctx, DatagramPacket msg, List<Object> out)
@@ -136,12 +138,13 @@ public class UdpRpcClient {
 //						out.add(msg.content().toString(Charset.forName("UTF-8")));						
 //					}
 //				});				
-//				// cp.addLast("handler", new UdpServerHandler());
-//			}
-//		});		
+				// cp.addLast("handler", new UdpServerHandler());
+			}
+		});		
 	}
 
 	/**
+	 * udp连接到服务器，
 	 * udp 发送心跳包，且有回应
 	 *
 	 */
@@ -158,25 +161,43 @@ public class UdpRpcClient {
 	public void heatbeat() throws InterruptedException {
 		//
 		//Channel channel = bootstrap.bind(9990).sync().channel();
-		Channel channel=bootstrap.bind(0).sync().channel();
+		InetSocketAddress inetSocketAddress = null;
+		if (channel == null || !channel.isActive()) {
+			channel=bootstrap.bind(0).sync().channel();
+			inetSocketAddress = new InetSocketAddress(serverName, serverPort);
+			channel.connect(inetSocketAddress);
+		}
 		// channel.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer("QUERY",
 		// CharsetUtil.UTF_8), new InetSocketAddress("255.255.255.255", port))).sync();
 		// if (!channel.closeFuture().await(15000)) {
 		// System.out.println("out of time");
 		// }
 		//channel.closeFuture().await(1000);
-
-		InetSocketAddress inetSocketAddress = new InetSocketAddress(serverName, serverPort);
 		
 		String requestId = RequestId.next();
 		MessageOutput output = new MessageOutput(requestId, "heartbeat", "");
-		ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
-		writeStr(buf, output.getRequestId());
-		writeStr(buf, output.getType());
-		writeStr(buf, JSON.toJSONString(output.getPayload()));
+		channel.writeAndFlush(output);
+        if (!channel.closeFuture().await(3000)) {
+            logger.info("查询超时");
+        }else {
+    		started = true;
+        }
+        
+        
+//		ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
+//		writeStr(buf, output.getRequestId());
+//		writeStr(buf, output.getType());
+//		writeStr(buf, JSON.toJSONString(output.getPayload()));
 		
-		DatagramPacket datagramPacket = new DatagramPacket(buf, inetSocketAddress);
-		
+//		MessageOutput output = new MessageOutput(requestId, "heartbeat", "");
+//		DatagramPacket datagramPacket = new DatagramPacket(buf, inetSocketAddress);
+//        channel.writeAndFlush(datagramPacket).sync();
+//        if (!channel.closeFuture().await(3000)) {
+//            logger.info("查询超时");
+//        }else {
+//    		started = true;
+//        }
+        
 //		channel.writeAndFlush(datagramPacket).addListener(new GenericFutureListener<ChannelFuture>() {
 //			public void operationComplete(ChannelFuture future) throws Exception {
 //				boolean success = future.isSuccess();
@@ -186,15 +207,7 @@ public class UdpRpcClient {
 //			}
 //		});
 		
-        channel.writeAndFlush(datagramPacket).sync();
-        if (!channel.closeFuture().await(3000)) {
-            logger.info("查询超时");
-        }
-		
-		if(!channel.closeFuture().await(5000)){
-			System.out.println("查询超时");
-		}
-		started = true;
+
 
 //		String requestId = RequestId.next();
 //		MessageOutput output = new MessageOutput(requestId, "heartbeat", "");

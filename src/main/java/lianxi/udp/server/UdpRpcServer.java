@@ -74,25 +74,31 @@ public class UdpRpcServer {
 		// for test
 		// bootstrap.handler(new UdpServerHandler());
 		// 4.配置handler 数据处理器。
-//		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
-//
-//			@Override
-//			protected void initChannel(NioDatagramChannel ch) throws Exception {
-//				// 注册hander
-//				ChannelPipeline pipe = ch.pipeline();
-//				// 如果客户端30秒没有任何请求,就关闭客户端连接
-//				//pipe.addLast(new IdleStateHandler(30, 30, 30));
-//				// 加解码器
-//				pipe.addLast(new MessageDecoder());
-//				// 编码器
-//				pipe.addLast(new MessageEncoder());
-//				// 将业务处理器放到最后
-//				// pipe.addLast(collector);
-//				//pipe.addLast(new UdpServerHandler());
-//			}
-//
-//		});
+		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
 
+			@Override
+			public void channelActive(ChannelHandlerContext ctx) throws Exception {
+				super.channelActive(ctx);
+			}
+			
+			@Override
+			protected void initChannel(NioDatagramChannel ch) throws Exception {
+				// 注册hander
+				ChannelPipeline pipe = ch.pipeline();
+				// 如果客户端30秒没有任何请求,就关闭客户端连接
+				//pipe.addLast(new IdleStateHandler(30, 30, 30));
+				// 加解码器
+				pipe.addLast(new MessageDecoder());
+				// 编码器
+				pipe.addLast(new MessageEncoder());
+				// 将业务处理器放到最后
+				pipe.addLast(collector);
+				//pipe.addLast(new UdpServerHandler());
+			}
+
+		});
+
+		// 能收到udpclient信息
 		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
 
 			@Override
