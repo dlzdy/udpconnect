@@ -25,7 +25,7 @@ public class UdpMainTest {
 	
 	public static void main(String[] args) {
 		try {
-			UdpServer.getInstance().start(host, port);
+			UdpLogServer.getInstance().start(host, port);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

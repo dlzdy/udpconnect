@@ -40,6 +40,27 @@ public class RPCClient {
 		this.init();
 	}
 
+	public void init() {
+		bootstrap = new Bootstrap();
+		group = new NioEventLoopGroup(1);
+		bootstrap.group(group);
+		MessageEncoder encoder = new MessageEncoder();
+		collector = new MessageCollector(registry, this);
+		bootstrap.channel(NioSocketChannel.class).handler(new ChannelInitializer<SocketChannel>() {
+
+			@Override
+			protected void initChannel(SocketChannel ch) throws Exception {
+				ChannelPipeline pipe = ch.pipeline();
+				pipe.addLast(new ReadTimeoutHandler(60));
+				pipe.addLast(new MessageDecoder());
+				pipe.addLast(encoder);
+				pipe.addLast(collector);
+			}
+
+		});
+		bootstrap.option(ChannelOption.TCP_NODELAY, true).option(ChannelOption.SO_KEEPALIVE, true);
+	}
+
 	public RPCClient rpc(String type, Class<?> reqClass) {
 		//rpc响应类型的注册快速入口
 		registry.register(type, reqClass);
@@ -72,26 +93,6 @@ public class RPCClient {
 		}
 	}
 
-	public void init() {
-		bootstrap = new Bootstrap();
-		group = new NioEventLoopGroup(1);
-		bootstrap.group(group);
-		MessageEncoder encoder = new MessageEncoder();
-		collector = new MessageCollector(registry, this);
-		bootstrap.channel(NioSocketChannel.class).handler(new ChannelInitializer<SocketChannel>() {
-
-			@Override
-			protected void initChannel(SocketChannel ch) throws Exception {
-				ChannelPipeline pipe = ch.pipeline();
-				pipe.addLast(new ReadTimeoutHandler(60));
-				pipe.addLast(new MessageDecoder());
-				pipe.addLast(encoder);
-				pipe.addLast(collector);
-			}
-
-		});
-		bootstrap.option(ChannelOption.TCP_NODELAY, true).option(ChannelOption.SO_KEEPALIVE, true);
-	}
 
 	public void connect() {
 		bootstrap.connect(ip, port).syncUninterruptibly();
