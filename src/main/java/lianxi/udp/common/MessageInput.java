@@ -19,7 +19,7 @@ public class MessageInput {
 	 */
 	private String type;
 	/**
-	 * 消息净荷
+	 * 消息净荷, Object
 	 */
 	private String payload;
 
