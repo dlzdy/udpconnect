@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler.Sharable;
 import lianxi.tcp.client.RpcFuture;
 import lianxi.tcp.common.MessageInput;
@@ -16,18 +17,19 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 @Sharable
-public class UdpMessageCollector extends ChannelInboundHandlerAdapter {
+public class UdpClientMessageHandler extends ChannelInboundHandlerAdapter {
 
-	private final static Logger logger = LoggerFactory.getLogger(UdpMessageCollector.class);
+	private final static Logger logger = LoggerFactory.getLogger(UdpClientMessageHandler.class);
 
 	private MessageRegistry registry;
 	private UdpRpcClient client;
 	private ChannelHandlerContext context;
+	//private Channel channel;
 	private ConcurrentMap<String, RpcFuture<?>> pendingTasks = new ConcurrentHashMap<>();
 
 	private Throwable ConnectionClosed = new Exception("rpc connection not active error");
 
-	public UdpMessageCollector(UdpRpcClient client) {
+	public UdpClientMessageHandler(UdpRpcClient client) {
 		this.client = client;
 	}
 
@@ -50,12 +52,11 @@ public class UdpMessageCollector extends ChannelInboundHandlerAdapter {
 	}
 
 	public <T> RpcFuture<T> send(MessageOutput output) {
-		ChannelHandlerContext ctx = context;
 		RpcFuture<T> future = new RpcFuture<T>();
-		if (ctx != null) {
-			ctx.channel().eventLoop().execute(() -> {
+		if (context != null) {
+			context.channel().eventLoop().execute(() -> {
 				pendingTasks.put(output.getRequestId(), future);
-				ctx.writeAndFlush(output);
+				context.writeAndFlush(output);
 			});
 		} else {
 			future.fail(ConnectionClosed);
@@ -85,15 +86,10 @@ public class UdpMessageCollector extends ChannelInboundHandlerAdapter {
 		future.success(o);
 	}
 
-	@Override
-	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-
-	}
 
 	public void close() {
-		ChannelHandlerContext ctx = context;
-		if (ctx != null) {
-			ctx.close();
+		if (context != null) {
+			context.close();
 		}
 	}
 

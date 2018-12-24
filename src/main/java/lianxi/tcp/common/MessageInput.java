@@ -5,13 +5,13 @@ import com.alibaba.fastjson.JSON;
 //定义消息输入输出格式，消息类型、消息唯一ID和消息的json序列化字符串内容。
 // 消息唯一ID是用来客户端验证服务器请求和响应是否匹配。
 public class MessageInput {
-	private String type;
 	private String requestId;
+	private String type;
 	private String payload;
 
-	public MessageInput(String type, String requestId, String payload) {
-		this.type = type;
+	public MessageInput(String requestId, String type, String payload) {
 		this.requestId = requestId;
+		this.type = type;
 		this.payload = payload;
 	}
 

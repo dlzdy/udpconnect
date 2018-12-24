@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zln.netty.five.part07.UdpServerHandler;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -20,15 +19,13 @@ import io.netty.channel.socket.DatagramPacket;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 import io.netty.handler.codec.MessageToMessageDecoder;
 import io.netty.handler.codec.MessageToMessageEncoder;
-import io.netty.handler.timeout.IdleStateHandler;
 import lianxi.tcp.common.IMessageHandler;
-import lianxi.tcp.common.MessageDecoder;
-import lianxi.tcp.common.MessageEncoder;
 import lianxi.tcp.common.MessageHandlers;
 import lianxi.tcp.common.MessageRegistry;
 import lianxi.tcp.server.DefaultHandler;
-import lianxi.tcp.server.MessageCollector;
 import lianxi.tcp.server.RPCServer;
+import lianxi.udp.common.UdpMessageDecoder;
+import lianxi.udp.common.UdpMessageEncoder;
 
 public class UdpRpcServer {
 
@@ -41,6 +38,7 @@ public class UdpRpcServer {
 	private Channel channel;
 	private MessageHandlers handlers = new MessageHandlers();
 	private MessageRegistry registry = new MessageRegistry();
+	private int workerThreads = 10;  //用来业务处理的计算线程
 	{
 		handlers.defaultHandler(new DefaultHandler());
 	}
@@ -49,7 +47,7 @@ public class UdpRpcServer {
 		this.port = port;
 	}
 
-	private MessageCollector collector;
+	private UdpServerMessageHandler collector;
 
 	// private Channel serverChannel;
 	// 注册服务的快捷方式
@@ -73,6 +71,7 @@ public class UdpRpcServer {
 		bootstrap.option(ChannelOption.SO_BROADCAST, true);
 		// for test
 		// bootstrap.handler(new UdpServerHandler());
+		collector = new UdpServerMessageHandler(handlers, registry, workerThreads);
 		// 4.配置handler 数据处理器。
 		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
 
@@ -88,43 +87,14 @@ public class UdpRpcServer {
 				// 如果客户端30秒没有任何请求,就关闭客户端连接
 				//pipe.addLast(new IdleStateHandler(30, 30, 30));
 				// 加解码器
-				pipe.addLast(new MessageDecoder());
+				pipe.addLast(new UdpMessageDecoder());
 				// 编码器
-				pipe.addLast(new MessageEncoder());
+				//pipe.addLast(new UdpMessageEncoder());
 				// 将业务处理器放到最后
 				pipe.addLast(collector);
 				//pipe.addLast(new UdpServerHandler());
 			}
 
-		});
-
-		// 能收到udpclient信息
-		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
-
-			@Override
-			public void channelActive(ChannelHandlerContext ctx) throws Exception {
-				super.channelActive(ctx);
-			}
-
-			@Override
-			protected void initChannel(NioDatagramChannel ch) throws Exception {
-				ChannelPipeline cp = ch.pipeline();
-				cp.addLast(new MessageToMessageDecoder<DatagramPacket>() {
-					@Override
-					protected void decode(ChannelHandlerContext ctx, DatagramPacket msg, List<Object> out)
-							throws Exception {
-						out.add(msg.content().toString(Charset.forName("UTF-8")));
-					}
-				});
-				cp.addLast(new MessageToMessageEncoder<DatagramPacket>() {
-					@Override
-					protected void encode(ChannelHandlerContext ctx, DatagramPacket msg, List<Object> out)
-							throws Exception {
-						out.add(msg.content().toString(Charset.forName("UTF-8")));						
-					}
-				});				
-				// cp.addLast("handler", new UdpServerHandler());
-			}
 		});
 
 		// 5.bootstrap启动服务器。

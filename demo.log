@@ -356,3 +356,51 @@ java.lang.ClassCastException: io.netty.channel.socket.nio.NioDatagramChannel can
 2018-12-24 13:36:01,133 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
 2018-12-24 13:49:01,177 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
 2018-12-24 13:49:17,085 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
+2018-12-24 20:25:30,000 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-24 20:33:17,133 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
+2018-12-24 20:33:41,389 [nioEventLoopGroup-2-1] [io.netty.channel.DefaultChannelPipeline] [WARN] - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.net.PortUnreachableException
+	at sun.nio.ch.DatagramChannelImpl.receive0(Native Method)
+	at sun.nio.ch.DatagramChannelImpl.receiveIntoNativeBuffer(Unknown Source)
+	at sun.nio.ch.DatagramChannelImpl.receive(Unknown Source)
+	at sun.nio.ch.DatagramChannelImpl.receive(Unknown Source)
+	at io.netty.channel.socket.nio.NioDatagramChannel.doReadMessages(NioDatagramChannel.java:250)
+	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:75)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:656)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Unknown Source)
+2018-12-24 20:35:00,923 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-24 20:35:16,396 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
+2018-12-24 20:35:42,156 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
+2018-12-24 21:46:04,808 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
+2018-12-24 21:49:01,137 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
+2018-12-24 23:51:20,422 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
+2018-12-24 23:52:13,735 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
+2018-12-24 23:59:31,783 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-24 23:59:56,220 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
+2018-12-25 00:00:14,221 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
+2018-12-25 00:00:34,513 [rpc-0] [lianxi.tcp.server.DefaultHandler] [ERROR] - unrecognized message type f3ba9bee40d843ccb28a56fdac41fa40 comes
+2018-12-25 00:00:36,058 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection leaves
+2018-12-25 00:00:47,842 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
+2018-12-25 00:01:06,095 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
+2018-12-25 00:01:32,481 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-25 00:02:36,607 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
+2018-12-25 00:02:53,164 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-25 00:03:44,444 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
+2018-12-25 00:04:55,519 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-25 00:06:13,975 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-25 00:06:51,485 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
+2018-12-25 00:07:55,376 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-25 00:08:00,734 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
+2018-12-25 00:08:08,562 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-25 00:08:08,563 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
+2018-12-25 00:08:16,420 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-25 00:08:16,420 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
+2018-12-25 00:08:22,581 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-25 00:08:22,582 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
+2018-12-25 00:09:45,552 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-25 00:10:06,271 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
