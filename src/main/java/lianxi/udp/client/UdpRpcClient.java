@@ -30,6 +30,8 @@ import lianxi.tcp.common.Charsets;
 import lianxi.tcp.common.MessageOutput;
 import lianxi.tcp.common.MessageRegistry;
 import lianxi.tcp.common.RequestId;
+import lianxi.tcp.demo.ExpRequest;
+import lianxi.tcp.demo.ExpResponse;
 import lianxi.udp.common.UdpMessageDecoder;
 import lianxi.udp.common.UdpMessageEncoder;
 
@@ -251,11 +253,41 @@ public class UdpRpcClient {
 		group.shutdownGracefully(0, 5000, TimeUnit.MILLISECONDS);
 	}
 
+	public long fib(int n) {
+		return (Long) this.send("fib", n);
+	}
+
+	public ExpResponse exp(int base, int exp) {
+		return (ExpResponse) this.send("exp", new ExpRequest(base, exp));
+	}
+	
 	public static void main(String[] args) throws InterruptedException {
-		UdpRpcClient udpClient = new UdpRpcClient("192.168.10.5", 8800);
+		UdpRpcClient udpClient = new UdpRpcClient("172.24.6.104", 8800);
 		udpClient.init();
 		udpClient.connect();
-		udpClient.heatbeat();
+		//udpClient.heatbeat();
+		udpClient.rpc("fib_res", Long.class);
+		udpClient.rpc("exp_res", ExpResponse.class);
+		
+		for (int i = 0; i < 1; i++) {
+			try {
+				System.out.printf("fib(%d) = %d\n", i, udpClient.fib(i));
+				Thread.sleep(100);
+			} catch (RPCException e) {
+				i--; // retry
+			}
+		}
+		Thread.sleep(3000);
+		for (int i = 0; i < 1; i++) {
+			try {
+				ExpResponse res = udpClient.exp(2, i);
+				Thread.sleep(100);
+				System.out.printf("exp2(%d) = %d cost=%dns\n", i, res.getValue(), res.getCostInNanos());
+			} catch (RPCException e) {
+				i--; // retry
+			}
+		}
+		
 		//udpClient.send("heatbeat", "test test");
 		// udpClient.rpc("fib_res", Long.class);
 		// udpClient.rpc("exp_res", ExpResponse.class);

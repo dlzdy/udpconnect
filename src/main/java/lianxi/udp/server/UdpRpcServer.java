@@ -1,7 +1,10 @@
 package lianxi.udp.server;
 
+import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +22,13 @@ import io.netty.channel.socket.DatagramPacket;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 import io.netty.handler.codec.MessageToMessageDecoder;
 import io.netty.handler.codec.MessageToMessageEncoder;
+import lianxi.tcp.client.RpcFuture;
 import lianxi.tcp.common.IMessageHandler;
 import lianxi.tcp.common.MessageHandlers;
 import lianxi.tcp.common.MessageRegistry;
+import lianxi.tcp.demo.ExpRequest;
+import lianxi.tcp.demo.ExpRequestHandler;
+import lianxi.tcp.demo.FibRequestHandler;
 import lianxi.tcp.server.DefaultHandler;
 import lianxi.tcp.server.RPCServer;
 import lianxi.udp.common.UdpMessageDecoder;
@@ -38,11 +45,15 @@ public class UdpRpcServer {
 	private Channel channel;
 	private MessageHandlers handlers = new MessageHandlers();
 	private MessageRegistry registry = new MessageRegistry();
+	// <appid, InetSocketAddress>
+	public static ConcurrentMap<String, InetSocketAddress> clienttMap = new ConcurrentHashMap<>();
+
 	private int workerThreads = 10;  //用来业务处理的计算线程
 	{
 		handlers.defaultHandler(new DefaultHandler());
 	}
 
+	
 	public UdpRpcServer(int port) {
 		this.port = port;
 	}
@@ -86,10 +97,10 @@ public class UdpRpcServer {
 				ChannelPipeline pipe = ch.pipeline();
 				// 如果客户端30秒没有任何请求,就关闭客户端连接
 				//pipe.addLast(new IdleStateHandler(30, 30, 30));
-				// 加解码器
+				// 解码器
 				pipe.addLast(new UdpMessageDecoder());
 				// 编码器
-				//pipe.addLast(new UdpMessageEncoder());
+				pipe.addLast(new UdpMessageEncoder(null));
 				// 将业务处理器放到最后
 				pipe.addLast(collector);
 				//pipe.addLast(new UdpServerHandler());
@@ -112,6 +123,8 @@ public class UdpRpcServer {
 
 	public static void main(String[] args) {
 		UdpRpcServer rpcServer = new UdpRpcServer(8800);
+		rpcServer.service("fib", Integer.class, new FibRequestHandler());
+		rpcServer.service("exp", ExpRequest.class,new ExpRequestHandler());
 		rpcServer.start();
 		// rpcServer.start2();
 	}

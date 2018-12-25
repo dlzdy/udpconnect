@@ -9,9 +9,9 @@ public class MessageInput {
 	private String type;
 	private String payload;
 
-	public MessageInput(String requestId, String type, String payload) {
-		this.requestId = requestId;
+	public MessageInput(String type, String requestId, String payload) {
 		this.type = type;
+		this.requestId = requestId;
 		this.payload = payload;
 	}
 

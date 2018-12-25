@@ -23,9 +23,11 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class UdpServerMessageHandler extends ChannelInboundHandlerAdapter {
 
 	private final static Logger logger = LoggerFactory.getLogger(UdpServerMessageHandler.class);
-	//业务线程池
+	// 业务线程池
 	private ThreadPoolExecutor executor;
+	// 
 	private MessageHandlers handlers;
+	// 
 	private MessageRegistry registry;
 
 	public UdpServerMessageHandler(MessageHandlers handlers, MessageRegistry registry, int workerThreads) {
@@ -42,13 +44,13 @@ public class UdpServerMessageHandler extends ChannelInboundHandlerAdapter {
 			public Thread newThread(Runnable r) {
 				Thread t = new Thread(r);
 				t.setName("rpc-" + seq.getAndIncrement());
+				logger.info("newThread:" +  t.getName());
 				return t;
 			}
 
 		};
 		//闲置时间超过30秒的线程就自动销毁
-		this.executor = new ThreadPoolExecutor(1, workerThreads, 30, TimeUnit.SECONDS, queue, factory,
-				new CallerRunsPolicy());
+		this.executor = new ThreadPoolExecutor(1, workerThreads, 30, TimeUnit.SECONDS, queue, factory, new CallerRunsPolicy());
 		this.handlers = handlers;
 		this.registry = registry;
 	}
@@ -77,6 +79,9 @@ public class UdpServerMessageHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+		
+		System.out.println(ctx.channel().remoteAddress());
+
 		if (msg instanceof MessageInput) {
 			//用业务线程处理消息
 			this.executor.execute(() -> {
