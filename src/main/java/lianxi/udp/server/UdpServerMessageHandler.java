@@ -80,8 +80,6 @@ public class UdpServerMessageHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 		
-		System.out.println(ctx.channel().remoteAddress());
-
 		if (msg instanceof MessageInput) {
 			//用业务线程处理消息
 			this.executor.execute(() -> {

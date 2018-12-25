@@ -25,6 +25,7 @@ public class UdpClientMessageHandler extends ChannelInboundHandlerAdapter {
 	private UdpRpcClient client;
 	private ChannelHandlerContext context;
 	//private Channel channel;
+	// <requestId, RpcFuture>
 	private ConcurrentMap<String, RpcFuture<?>> pendingTasks = new ConcurrentHashMap<>();
 
 	private Throwable ConnectionClosed = new Exception("rpc connection not active error");
