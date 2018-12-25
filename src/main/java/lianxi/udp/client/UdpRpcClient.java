@@ -51,6 +51,8 @@ public class UdpRpcClient {
 	// // 是否连接
 	// private boolean isConnected;
 	private boolean started;
+
+
 	private boolean stopped;
 	private UdpClientMessageHandler collector;
 	private ConcurrentMap<String, RpcFuture<?>> pendingTasks = new ConcurrentHashMap<>();
@@ -69,7 +71,15 @@ public class UdpRpcClient {
 		registry.register(type, reqClass);
 		return this;
 	}
+	
+	public Channel getChannel() {
+		return channel;
+	}
 
+	public void setChannel(Channel channel) {
+		this.channel = channel;
+	}
+	
 	private void init() {
 		bootstrap = new Bootstrap();
 		// 1.设置bossGroup和workGroup
@@ -96,7 +106,7 @@ public class UdpRpcClient {
 				// 编码器
 				pipe.addLast(new UdpMessageEncoder(inetSocketAddress));
 				// 将业务处理器放到最后
-				pipe.addLast(collector);
+				 pipe.addLast(collector);
 
 			}
 
@@ -189,22 +199,22 @@ public class UdpRpcClient {
 				ChannelFuture channelFuture = bootstrap.bind(0).sync();
 				channel = channelFuture.channel();
 				
-				MessageOutput output = new MessageOutput(RequestId.next(), "heartbeat", "");
-				ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
-				writeStr(buf, output.getRequestId());
-				writeStr(buf, output.getType());
-				writeStr(buf, JSON.toJSONString(output.getPayload()));
-				
-				DatagramPacket datagramPacket = new DatagramPacket(buf, inetSocketAddress);
-		        channel.writeAndFlush(datagramPacket).sync();
-		        if (!channel.closeFuture().await(3000)) {
-		            logger.warn("connect failed");
-		        }else {
-		    		started = true;
-		        }
+//				MessageOutput output = new MessageOutput(RequestId.next(), "heartbeat", "");
+//				ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
+//				writeStr(buf, output.getRequestId());
+//				writeStr(buf, output.getType());
+//				writeStr(buf, JSON.toJSONString(output.getPayload()));
+//				
+//				DatagramPacket datagramPacket = new DatagramPacket(buf, inetSocketAddress);
+//		        channel.writeAndFlush(datagramPacket).sync();
+//		        if (!channel.closeFuture().await(3000)) {
+//		            logger.warn("connect failed");
+//		        }else {
+//		    		started = true;
+//		        }
 				
 			}
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -237,16 +247,16 @@ public class UdpRpcClient {
 
 	public void close() {
 		stopped = true;
-		collector.close();
+		channel.close();
 		group.shutdownGracefully(0, 5000, TimeUnit.MILLISECONDS);
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		UdpRpcClient udpClient = new UdpRpcClient("localhost", 8800);
+		UdpRpcClient udpClient = new UdpRpcClient("192.168.10.5", 8800);
 		udpClient.init();
 		udpClient.connect();
-		//udpClient.heatbeat();
-		udpClient.send("heatbeat", "test test");
+		udpClient.heatbeat();
+		//udpClient.send("heatbeat", "test test");
 		// udpClient.rpc("fib_res", Long.class);
 		// udpClient.rpc("exp_res", ExpResponse.class);
 	}

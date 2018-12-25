@@ -32,24 +32,30 @@ public class UdpClientMessageHandler extends ChannelInboundHandlerAdapter {
 	public UdpClientMessageHandler(UdpRpcClient client) {
 		this.client = client;
 	}
-
+	@Override
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+		logger.info("注册事件");
+    }
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+		//来了一个新的连接
+		logger.info("connection comes, " + ctx.channel().remoteAddress());
 		this.context = ctx;
 	}
 
-	@Override
-	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-		this.context = null;
-		pendingTasks.forEach((__, future) -> {
-			future.fail(ConnectionClosed);
-		});
-		pendingTasks.clear();
-		// 尝试重连
-		ctx.channel().eventLoop().schedule(() -> {
-			client.reconnect();
-		}, 1, TimeUnit.SECONDS);
-	}
+//	@Override
+//	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+//		logger.info("channelInactive");
+//		this.context = null;
+//		pendingTasks.forEach((__, future) -> {
+//			future.fail(ConnectionClosed);
+//		});
+//		pendingTasks.clear();
+//		// 尝试重连
+//		ctx.channel().eventLoop().schedule(() -> {
+//			client.reconnect();
+//		}, 1, TimeUnit.SECONDS);
+//	}
 
 	public <T> RpcFuture<T> send(MessageOutput output) {
 		RpcFuture<T> future = new RpcFuture<T>();
@@ -66,6 +72,8 @@ public class UdpClientMessageHandler extends ChannelInboundHandlerAdapter {
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+		logger.info("channelRead");
+
 		if (!(msg instanceof MessageInput)) {
 			return;
 		}

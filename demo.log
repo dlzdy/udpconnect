@@ -404,3 +404,42 @@ java.net.PortUnreachableException
 2018-12-25 00:08:22,582 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
 2018-12-25 00:09:45,552 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
 2018-12-25 00:10:06,271 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
+2018-12-25 12:16:30,687 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-25 12:16:30,687 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
+2018-12-25 12:18:26,646 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
+2018-12-25 12:19:43,766 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes
+2018-12-25 12:19:46,775 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
+2018-12-25 12:20:46,548 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes
+2018-12-25 12:20:49,557 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
+2018-12-25 12:21:00,793 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
+2018-12-25 12:21:00,793 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
+2018-12-25 12:28:22,028 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes
+2018-12-25 12:28:45,819 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes
+2018-12-25 12:28:49,804 [rpc-0] [lianxi.tcp.server.DefaultHandler] [ERROR] - unrecognized message type f917a43126184cb9aee4f441240c8e7c comes
+2018-12-25 12:28:49,805 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection leaves
+2018-12-25 12:29:22,539 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes
+2018-12-25 12:34:46,027 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes
+2018-12-25 13:56:41,429 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comesnull
+2018-12-25 13:57:00,492 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comesnull
+2018-12-25 14:05:41,369 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
+2018-12-25 14:05:57,947 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
+2018-12-25 14:07:45,989 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
+2018-12-25 14:07:48,553 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
+2018-12-25 15:59:29,296 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
+2018-12-25 15:59:29,304 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
+2018-12-25 16:09:59,027 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
+2018-12-25 16:09:59,036 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
+2018-12-25 16:12:05,857 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
+2018-12-25 16:12:05,864 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
+2018-12-25 16:12:08,301 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
+2018-12-25 16:12:08,310 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
+2018-12-25 16:12:24,043 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
+2018-12-25 16:12:24,049 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
+2018-12-25 16:12:41,143 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
+2018-12-25 16:12:41,152 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
+2018-12-25 16:16:23,008 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
+2018-12-25 16:16:23,015 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
+2018-12-25 16:18:58,960 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
+2018-12-25 16:18:58,969 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
+2018-12-25 16:32:27,655 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
+2018-12-25 16:32:27,664 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null

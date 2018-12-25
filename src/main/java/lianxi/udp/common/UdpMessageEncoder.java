@@ -34,7 +34,7 @@ public class UdpMessageEncoder extends MessageToMessageEncoder<MessageOutput> {
 		// payload,json格式
 		writeStr(buf, JSON.toJSONString(msg.getPayload()));
 		// 创建DatagramPacket实例并添加到结果列表
-		out.add(new DatagramPacket(buf, remoteAddress));
+		out.add(new DatagramPacket(buf, remoteAddress)); //直接就发走了，不再走pipeline
 	}
 
 	private void writeStr(ByteBuf buf, String s) {
