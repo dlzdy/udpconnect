@@ -1,4 +1,4 @@
-package com.cscecee.basesite.core.udp.server;
+package com.cscecee.basesite.core.udp.client;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -12,31 +12,37 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.alibaba.fastjson.JSON;
 import com.cscecee.basesite.core.udp.common.Charsets;
 import com.cscecee.basesite.core.udp.common.CommonMessage;
 import com.cscecee.basesite.core.udp.common.IMessageHandler;
 import com.cscecee.basesite.core.udp.common.MessageHandlers;
+import com.cscecee.basesite.core.udp.test.ExpResponse;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.handler.codec.DecoderException;
+import lianxi.tcp.client.RpcFuture;
+import lianxi.tcp.common.MessageOutput;
 
 /**
  * Created by sherry on 16/11/7.
  */
-public class UdpServerHandler extends SimpleChannelInboundHandler<DatagramPacket> {
+public class UdpClientHandler extends SimpleChannelInboundHandler<DatagramPacket> {
 
-	private final static Logger logger = LoggerFactory.getLogger(UdpServerHandler.class);
+	private final static Logger logger = LoggerFactory.getLogger(UdpClientHandler.class);
 	// 业务线程池
 	private ThreadPoolExecutor executor;
 
 	private MessageHandlers handlers;
-
-//	private MessageRegistry registry;
-
-	public UdpServerHandler(MessageHandlers handlers, int workerThreads) {
+	
+	InetSocketAddress inetSocketAddress;
+	
+	public UdpClientHandler(InetSocketAddress inetSocketAddress, MessageHandlers handlers, int workerThreads) {
+		this.inetSocketAddress = inetSocketAddress;
 		System.out.println("=========2=============" + "MessageCollector.构造");
 		// 业务队列最大1000,避免堆积
 		// 如果子线程处理不过来,io线程也会加入业务逻辑(callerRunsPolicy)
@@ -60,6 +66,7 @@ public class UdpServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 		//this.registry = registry;
 	}
 
+
 	// public void closeGracefully() {
 	// //优雅一点关闭,先通知,再等待,最后强制关闭
 	// this.executor.shutdown();
@@ -71,15 +78,7 @@ public class UdpServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 	// }
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket datagramPacket) throws Exception {
-		
 		try {
-			// String req = msg.content().toString(CharsetUtil.UTF_8);
-			// logger.info("收到的请求:" + req);
-			// if ("谚语字典查询?".equals(req)) {
-			// ctx.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer("谚语查询结果:" +
-			// nextQueue(), CharsetUtil.UTF_8), msg.sender()));
-			// }
-
 			// 用业务线程处理消息
 			this.executor.execute(() -> {
 				this.handleMessage(ctx, datagramPacket);
@@ -92,13 +91,6 @@ public class UdpServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 	
 	private void handleMessage(ChannelHandlerContext ctx, DatagramPacket datagramPacket) {
 		// 业务逻辑在这里
-//		Class<?> clazz = registry.get(input.getType());
-//		if (clazz == null) {
-//			//没注册的消息用默认的处理器处理
-//			//handlers.defaultHandler().handle(ctx, input.getRequestId(), input);
-//			logger.error("not found clazz of " + input.getType());
-//			return;
-//		}
 		InetSocketAddress sender = datagramPacket.sender();
 		ByteBuf in = datagramPacket.content();
 		String fromId = readStr(in);
@@ -134,4 +126,31 @@ public class UdpServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 		logger.error(cause.getMessage(), cause);
 	}
 
+
+	public <T> RpcFuture<T> send(CommonMessage output) {
+		RpcFuture<T> future = new RpcFuture<T>();
+
+		
+		ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
+		String fromId = "0";
+		writeStr(buf, output.getFromId() );
+		writeStr(buf, output.getRequestId());
+		writeStr(buf, output.getType());//****
+		writeStr(buf, JSON.toJSONString(output.getPayload()));
+		//ctx.writeAndFlush(new DatagramPacket(buf, sender));
+//		if (channel != null) {
+//		channel.eventLoop().execute(() -> {
+//			pendingTasks.put(output.getRequestId(), future);
+//			channel.writeAndFlush(output);
+//		});
+//	} else {
+//		future.fail(ConnectionClosed);
+//	}		
+		return future;
+	}
+	
+	private void writeStr(ByteBuf buf, String s) {
+		buf.writeInt(s.length());
+		buf.writeBytes(s.getBytes(Charsets.UTF8));
+	}	
 }

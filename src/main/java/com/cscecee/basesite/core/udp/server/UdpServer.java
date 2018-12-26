@@ -3,20 +3,18 @@ package com.cscecee.basesite.core.udp.server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.cscecee.basesite.core.udp.common.IMessageHandler;
+import com.cscecee.basesite.core.udp.common.MessageHandlers;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
-import lianxi.tcp.server.RPCServer;
-import lianxi.udp.common.UdpMessageDecoder;
-import lianxi.udp.common.UdpMessageEncoder;
-import lianxi.udp.server.UdpServerMessageHandler;
+
 
 public class UdpServer {
 
@@ -29,10 +27,19 @@ public class UdpServer {
 	private Channel channel;
 	private UdpServerHandler serverHandler;
 	
+
+	private MessageHandlers handlers = new MessageHandlers();
+	
 	public UdpServer(int port) {
 		this.port = port;
 	}
-
+	/*
+	 * 注册服务的快捷方式
+	 */
+	public void register(String type,  IMessageHandler<?> handler) {
+		handlers.register(type, handler);
+	}
+	
 	public void start() {
 		eventLoopGroup = new NioEventLoopGroup();
 		bootstrap = new Bootstrap();
@@ -42,14 +49,14 @@ public class UdpServer {
 		bootstrap.channel(NioDatagramChannel.class);
 		// 3.配置TCP/UDP参数。
 		//bootstrap.option(ChannelOption.SO_BROADCAST, true);
-		serverHandler = new UdpServerHandler();
+		serverHandler = new UdpServerHandler(handlers ,10);
 		// 4.配置handler 数据处理器。
 		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
 			@Override
 			protected void initChannel(NioDatagramChannel ch) throws Exception {
 				// 注册hander
 				ChannelPipeline pipe = ch.pipeline();
-				pipe.addLast(new UdpServerHandler());
+				pipe.addLast(serverHandler);
 			}
 
 		});
