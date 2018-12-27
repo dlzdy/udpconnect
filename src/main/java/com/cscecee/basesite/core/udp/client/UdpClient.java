@@ -7,9 +7,11 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cscecee.basesite.core.udp.common.CommonMessage;
+import com.cscecee.basesite.core.udp.common.MessageCommon;
 import com.cscecee.basesite.core.udp.common.IMessageHandler;
 import com.cscecee.basesite.core.udp.common.MessageHandlers;
+import com.cscecee.basesite.core.udp.common.MessageReq;
+import com.cscecee.basesite.core.udp.common.UdpMessageHandler;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -47,7 +49,7 @@ public class UdpClient {
 
 	private boolean stopped;
 
-	private UdpClientHandler handler;
+	private UdpMessageHandler clientHandler;
 	
 	private Throwable ConnectionClosed = new Exception("rpc connection not active error");
 	
@@ -92,7 +94,8 @@ public class UdpClient {
 		bootstrap.option(ChannelOption.SO_BROADCAST, true);
 		// 4.配置handler和childHandler，数据处理器。
 		remoteSocketAddress = new InetSocketAddress(serverName, serverPort);
-		handler = new UdpClientHandler(this, 10);
+		clientHandler =  new UdpMessageHandler(handlers ,10);
+		
 		// bootstrap.handler(new LoggingHandler(LogLevel.INFO));
 		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
 
@@ -101,7 +104,7 @@ public class UdpClient {
 				// 注册hander
 				ChannelPipeline pipe = ch.pipeline();
 				// 将业务处理器放到最后
-			    pipe.addLast(handler);
+			    pipe.addLast(clientHandler);
 
 			}
 
@@ -116,7 +119,7 @@ public class UdpClient {
 	 * @param payload
 	 * @return
 	 */
-	public <T> RpcFuture<T> sendAsync(String type, Object payload) {
+	private <T> RpcFuture<T> sendAsync(String command, boolean isCompressed, byte[] data) {
 		if (!started) {//未连接
 			try {
 				connect();
@@ -127,8 +130,8 @@ public class UdpClient {
 			}
 		}
 		String requestId = RequestId.next();
-		CommonMessage output = new CommonMessage(clientId, requestId, type, payload);
-		return handler.send(output);
+		MessageReq output = new MessageReq(requestId, clientId,  command,  isCompressed, data);
+		return clientHandler.send(output);
 	}
 
 	/**
@@ -137,9 +140,9 @@ public class UdpClient {
 	 * @param payload
 	 * @return
 	 */
-	public <T> T send(String type, Object payload) {
+	public <T> T send(String command, boolean isCompressed, byte[] data) {
 		// 普通rpc请求,正常获取响应
-		RpcFuture<T> future = sendAsync(type, payload);
+		RpcFuture<T> future = sendAsync(command, isCompressed, data);
 		try {
 			return future.get();
 		} catch (InterruptedException | ExecutionException e) {

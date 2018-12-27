@@ -25,13 +25,13 @@ public class TestUdpClient {
 
 	}
 	public Object fib(int n) {
-		Object result = client.send("fib", n);
+		Object result = client.send("fib", false, (n + "").getBytes());
 		return  result ;
 	}
 
 	//ExpResponse
 	public Object exp(int base, int exp) {
-		Object result = client.send("exp", JSON.toJSONString(new ExpRequest(base, exp)));
+		Object result = client.send("exp", false, JSON.toJSONString(new ExpRequest(base, exp)).getBytes());
 		return  result ;
 		//return (ExpResponse) client.send("exp", new ExpRequest(base, exp));
 	}

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.cscecee.basesite.core.udp.common.IMessageHandler;
 import com.cscecee.basesite.core.udp.common.MessageHandlers;
+import com.cscecee.basesite.core.udp.common.UdpMessageHandler;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -25,7 +26,7 @@ public class UdpServer {
 	private Bootstrap bootstrap;
 	private EventLoopGroup eventLoopGroup;
 	private Channel channel;
-	private UdpServerHandler serverHandler;
+	private UdpMessageHandler serverHandler;
 	
 
 	private MessageHandlers handlers = new MessageHandlers();
@@ -49,7 +50,8 @@ public class UdpServer {
 		bootstrap.channel(NioDatagramChannel.class);
 		// 3.配置TCP/UDP参数。
 		//bootstrap.option(ChannelOption.SO_BROADCAST, true);
-		serverHandler = new UdpServerHandler(handlers ,10);
+		//serverHandler = new UdpServerHandler(handlers ,10);
+		serverHandler = new UdpMessageHandler(handlers ,10);
 		// 4.配置handler 数据处理器。
 		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
 			@Override
@@ -66,6 +68,7 @@ public class UdpServer {
 			ChannelFuture sync = bootstrap.bind(port).sync();
 			logger.info("udp server is running ......");
 			channel = sync.channel();
+			serverHandler.setChannel(channel);//*****
 			channel.closeFuture().await();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
