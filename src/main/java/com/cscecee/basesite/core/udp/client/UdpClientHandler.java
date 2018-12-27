@@ -69,9 +69,6 @@ public class UdpClientHandler extends SimpleChannelInboundHandler<DatagramPacket
 	}
 
 
-
-
-
 	// public void closeGracefully() {
 	// //优雅一点关闭,先通知,再等待,最后强制关闭
 	// this.executor.shutdown();
@@ -91,7 +88,7 @@ public class UdpClientHandler extends SimpleChannelInboundHandler<DatagramPacket
 			String type = readStr(in);//type
 			String payload = readStr(in);//TODO byte[]
 			
-			logger.info("recieve reqid <<<<<" + requestId);
+			logger.debug("recieve reqid <<<<<" + requestId);
 
 			RpcFuture<Object> future = (RpcFuture<Object>) pendingTasks.remove(requestId);
 			if (future == null) {//没找到对应的reqId
@@ -153,14 +150,14 @@ public class UdpClientHandler extends SimpleChannelInboundHandler<DatagramPacket
 		writeStr(buf, output.getFromId() );// fromId
 		writeStr(buf, output.getRequestId());// requestId
 		writeStr(buf, output.getType());//type
-		writeStr(buf, JSON.toJSONString(output.getPayload()));//payload
+		writeStr(buf, output.getPayload() + "");//payload
 		//ctx.writeAndFlush(new DatagramPacket(buf, sender));
 		Channel channel = udpClient.getChannel();
 		if (channel != null) {
 			channel.eventLoop().execute(() -> {
 				pendingTasks.put(output.getRequestId(), future);
 				// datasocket
-				logger.info("send reqid >>>>>" + output.getRequestId());
+				logger.debug("send reqid >>>>>" + output.getRequestId());
 				channel.writeAndFlush(new DatagramPacket(buf, udpClient.getRemoteSocketAddress()));
 				
 			});

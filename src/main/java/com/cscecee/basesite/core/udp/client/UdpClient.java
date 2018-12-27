@@ -1,23 +1,17 @@
 package com.cscecee.basesite.core.udp.client;
 
 import java.net.InetSocketAddress;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.fastjson.JSON;
 import com.cscecee.basesite.core.udp.common.CommonMessage;
 import com.cscecee.basesite.core.udp.common.IMessageHandler;
 import com.cscecee.basesite.core.udp.common.MessageHandlers;
-import com.cscecee.basesite.core.udp.test.client.FibRespHandler;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -25,19 +19,10 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.DatagramPacket;
 import io.netty.channel.socket.nio.NioDatagramChannel;
-import io.netty.handler.timeout.IdleStateHandler;
 import lianxi.tcp.client.RPCException;
 import lianxi.tcp.client.RpcFuture;
-import lianxi.tcp.common.Charsets;
-import lianxi.tcp.common.MessageOutput;
-import lianxi.tcp.common.MessageRegistry;
 import lianxi.tcp.common.RequestId;
-import lianxi.tcp.demo.ExpRequest;
-import lianxi.tcp.demo.ExpResponse;
-import lianxi.udp.common.UdpMessageDecoder;
-import lianxi.udp.common.UdpMessageEncoder;
 
 public class UdpClient {
 
@@ -46,6 +31,8 @@ public class UdpClient {
 	private String serverName;
 	// 服务器端口
 	private int serverPort;
+	// 客户端ID
+	private String clientId;
 	//
 	private Bootstrap bootstrap;
 	//
@@ -58,18 +45,20 @@ public class UdpClient {
 	// private boolean isConnected;
 	private boolean started = false;
 
-
 	private boolean stopped;
+
 	private UdpClientHandler handler;
-	private ConcurrentMap<String, RpcFuture<?>> pendingTasks = new ConcurrentHashMap<>();
+	
 	private Throwable ConnectionClosed = new Exception("rpc connection not active error");
+	
 	private InetSocketAddress remoteSocketAddress = null;
 
 	private MessageHandlers handlers = new MessageHandlers();
 
-	public UdpClient(String serverName, int serverPort) {
+	public UdpClient(String serverName, int serverPort, String clientId) {
 		this.serverName = serverName;
 		this.serverPort = serverPort;
+		this.clientId = clientId;
 		this.init();
 	}
 	
@@ -138,7 +127,7 @@ public class UdpClient {
 			}
 		}
 		String requestId = RequestId.next();
-		CommonMessage output = new CommonMessage(requestId, type, payload);
+		CommonMessage output = new CommonMessage(clientId, requestId, type, payload);
 		return handler.send(output);
 	}
 
@@ -152,7 +141,6 @@ public class UdpClient {
 		// 普通rpc请求,正常获取响应
 		RpcFuture<T> future = sendAsync(type, payload);
 		try {
-			logger.info("future.get() .......");
 			return future.get();
 		} catch (InterruptedException | ExecutionException e) {
 			throw new RPCException(e);

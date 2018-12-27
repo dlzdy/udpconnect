@@ -46,7 +46,7 @@ public class FibRequestHandler implements IMessageHandler {
 		writeStr(buf, "fib_res");//****
 		writeStr(buf, fibs.get(n) + "");
 		//响应输出
-		logger.info("send fib_res>>>>>" + fibs.get(n));
+		logger.debug("send fib_res>>>>>" + fibs.get(n));
 		ctx.writeAndFlush(new DatagramPacket(buf, sender));
 	}
 	private void writeStr(ByteBuf buf, String s) {

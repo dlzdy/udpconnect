@@ -37,7 +37,6 @@ public class UdpServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 //	private MessageRegistry registry;
 
 	public UdpServerHandler(MessageHandlers handlers, int workerThreads) {
-		System.out.println("=========2=============" + "MessageCollector.构造");
 		// 业务队列最大1000,避免堆积
 		// 如果子线程处理不过来,io线程也会加入业务逻辑(callerRunsPolicy)
 		BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(1000);
