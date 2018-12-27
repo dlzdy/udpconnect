@@ -23,7 +23,7 @@ public class TestUdpClient {
 			Channel ch = b.bind(0).sync().channel();
 
 			ch.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer(context, CharsetUtil.UTF_8),
-					new InetSocketAddress("192.168.10.5", port)));
+					new InetSocketAddress("localhost", port)));
 
 			if (!ch.closeFuture().await(5000)) {
 				System.out.println("查询超时");

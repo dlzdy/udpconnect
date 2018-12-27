@@ -1,4 +1,7 @@
-package com.cscecee.basesite.core.udp.test;
+package com.cscecee.basesite.core.udp.test.client;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.cscecee.basesite.core.udp.client.UdpClient;
 
@@ -9,6 +12,7 @@ import lianxi.tcp.demo.ExpRequest;
 import lianxi.tcp.demo.ExpResponse;
 
 public class TestUdpClient {
+	private final static Logger logger = LoggerFactory.getLogger(TestUdpClient.class);
 
 	private UdpClient client;
 
@@ -18,20 +22,25 @@ public class TestUdpClient {
 		this.client.register("exp_res", new ExpRespHandler());
 
 	}
+	public Object fib(int n) {
+		Object result = client.send("fib", n);
+		return  result ;
+	}
 
-//
-//	public ExpResponse exp(int base, int exp) {
-//		return (ExpResponse) client.send("exp", new ExpRequest(base, exp));
-//	}
+	public ExpResponse exp(int base, int exp) {
+		return (ExpResponse) client.send("exp", new ExpRequest(base, exp));
+	}
 //RPC客户端要链接远程IP端口，并注册服务输出类(RPC响应类)，
 // 然后分别调用20次斐波那契服务和指数服务，输出结果
 
 	public static void main(String[] args) throws InterruptedException {
-		UdpClient client = new UdpClient("localhost", 8888);
+		UdpClient client = new UdpClient("localhost", 8800);
 		TestUdpClient testClient = new TestUdpClient(client);
+		//System.out.printf("fib(%d) = %s\n", 2, testClient.fib(2));
+
 		for (int i = 0; i < 30; i++) {
 			try {
-				System.out.printf("fib(%d) = %d\n", i, client.send("fib", i));
+				System.out.printf("fib(%d) = %s\n", i, (testClient.fib(i)+""));
 				Thread.sleep(100);
 			} catch (RPCException e) {
 				i--; // retry

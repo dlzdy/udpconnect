@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class MessageHandlers {
 
-	private Map<String, IMessageHandler<?>> handlers = new HashMap<>();
+	private Map<String, IMessageHandler> handlers = new HashMap<>();
 	
 //	private IMessageHandler<MessageInput> defaultHandler;
 
-	public void register(String type, IMessageHandler<?> handler) {
+	public void register(String type, IMessageHandler handler) {
 		handlers.put(type, handler);
 	}
 
@@ -22,8 +22,8 @@ public class MessageHandlers {
 //		return defaultHandler;
 //	}
 
-	public IMessageHandler<?> get(String type) {
-		IMessageHandler<?> handler = handlers.get(type);
+	public IMessageHandler get(String type) {
+		IMessageHandler handler = handlers.get(type);
 		return handler;
 	}
 

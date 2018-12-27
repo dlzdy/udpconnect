@@ -71,18 +71,17 @@ public class UdpServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 	// }
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket datagramPacket) throws Exception {
-		
 		try {
-			// String req = msg.content().toString(CharsetUtil.UTF_8);
-			// logger.info("收到的请求:" + req);
-			// if ("谚语字典查询?".equals(req)) {
-			// ctx.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer("谚语查询结果:" +
-			// nextQueue(), CharsetUtil.UTF_8), msg.sender()));
-			// }
-
+			InetSocketAddress sender = datagramPacket.sender();
+			ByteBuf in = datagramPacket.content();
+			String fromId = readStr(in);//fromId
+			String requestId = readStr(in);//requestId
+			String type = readStr(in);//type
+			String payload = readStr(in);//TODO byte[]
+			final CommonMessage messageInput = new CommonMessage(fromId, requestId, type, payload);
 			// 用业务线程处理消息
 			this.executor.execute(() -> {
-				this.handleMessage(ctx, datagramPacket);
+				this.handleMessage(ctx, sender, messageInput);
 			});
 
 		} catch (Exception e) {
@@ -90,32 +89,15 @@ public class UdpServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 		}
 	}
 	
-	private void handleMessage(ChannelHandlerContext ctx, DatagramPacket datagramPacket) {
+	private void handleMessage(ChannelHandlerContext ctx, InetSocketAddress sender, CommonMessage messageInput) {
 		// 业务逻辑在这里
-//		Class<?> clazz = registry.get(input.getType());
-//		if (clazz == null) {
-//			//没注册的消息用默认的处理器处理
-//			//handlers.defaultHandler().handle(ctx, input.getRequestId(), input);
-//			logger.error("not found clazz of " + input.getType());
-//			return;
-//		}
-		InetSocketAddress sender = datagramPacket.sender();
-		ByteBuf in = datagramPacket.content();
-		String fromId = readStr(in);
-		String requestId = readStr(in);
-		String type = readStr(in);
-		String payload = readStr(in);//TODO byte[]
-		final CommonMessage messageInput = new CommonMessage(fromId, requestId, type, payload);
 		
-		//Object payload = input.getPayload();
-		//这里有问题
-		@SuppressWarnings("unchecked")
-		IMessageHandler<Object> handler = (IMessageHandler<Object>) handlers.get(type);
+		IMessageHandler handler = handlers.get(messageInput.getType());
 		if (handler != null) {
-			handler.handle(ctx, sender, requestId, payload);
+			handler.handle(ctx, sender, messageInput.getRequestId(),  messageInput.getPayload());
 		} else {
 			//handlers.defaultHandler().handle(ctx, input.getRequestId(), input);
-			logger.error("not found handler of " + type);
+			logger.error("not found handler of " + messageInput.getType());
 		}
 	}
 	private String readStr(ByteBuf in) {
@@ -134,4 +116,32 @@ public class UdpServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 		logger.error(cause.getMessage(), cause);
 	}
 
+//	public <T> RpcFuture<T> send(CommonMessage output) {
+//		RpcFuture<T> future = new RpcFuture<T>();
+//
+//		
+//		ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
+//		writeStr(buf, output.getFromId() );// fromId
+//		writeStr(buf, output.getRequestId());// requestId
+//		writeStr(buf, output.getType());//type
+//		writeStr(buf, JSON.toJSONString(output.getPayload()));//payload
+//		//ctx.writeAndFlush(new DatagramPacket(buf, sender));
+//		Channel channel = udpClient.getChannel();
+//		if (channel != null) {
+//			channel.eventLoop().execute(() -> {
+//				pendingTasks.put(output.getRequestId(), future);
+//				// datasocket
+//				channel.writeAndFlush(new DatagramPacket(buf, udpClient.getRemoteSocketAddress()));
+//				
+//			});
+//		} else {
+//			future.fail(ConnectionClosed);
+//		}		
+//		return future;
+//	}
+	
+	private void writeStr(ByteBuf buf, String s) {
+		buf.writeInt(s.length());
+		buf.writeBytes(s.getBytes(Charsets.UTF8));
+	}	
 }

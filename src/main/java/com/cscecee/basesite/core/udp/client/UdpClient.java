@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.cscecee.basesite.core.udp.common.CommonMessage;
 import com.cscecee.basesite.core.udp.common.IMessageHandler;
 import com.cscecee.basesite.core.udp.common.MessageHandlers;
-import com.cscecee.basesite.core.udp.test.FibRespHandler;
+import com.cscecee.basesite.core.udp.test.client.FibRespHandler;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
@@ -56,14 +56,14 @@ public class UdpClient {
 	// private boolean isRunning;
 	// // 是否连接
 	// private boolean isConnected;
-	private boolean started;
+	private boolean started = false;
 
 
 	private boolean stopped;
-	private UdpClientHandler udpClientHandler;
+	private UdpClientHandler handler;
 	private ConcurrentMap<String, RpcFuture<?>> pendingTasks = new ConcurrentHashMap<>();
 	private Throwable ConnectionClosed = new Exception("rpc connection not active error");
-	private InetSocketAddress inetSocketAddress = null;
+	private InetSocketAddress remoteSocketAddress = null;
 
 	private MessageHandlers handlers = new MessageHandlers();
 
@@ -77,14 +77,18 @@ public class UdpClient {
 		return channel;
 	}
 
-	public void setChannel(Channel channel) {
-		this.channel = channel;
+	public InetSocketAddress getRemoteSocketAddress() {
+		return remoteSocketAddress;
+	}
+	
+	public MessageHandlers getHandlers() {
+		return handlers;
 	}
 
 	/*
 	 * 注册服务的快捷方式
 	 */
-	public void register(String type,  IMessageHandler<?> handler) {
+	public void register(String type,  IMessageHandler handler) {
 		handlers.register(type, handler);
 	}
 
@@ -98,8 +102,8 @@ public class UdpClient {
 		// 3.配置TCP/UDP参数。
 		bootstrap.option(ChannelOption.SO_BROADCAST, true);
 		// 4.配置handler和childHandler，数据处理器。
-		inetSocketAddress = new InetSocketAddress(serverName, serverPort);
-		udpClientHandler = new UdpClientHandler(inetSocketAddress, handlers , 10);
+		remoteSocketAddress = new InetSocketAddress(serverName, serverPort);
+		handler = new UdpClientHandler(this, 10);
 		// bootstrap.handler(new LoggingHandler(LogLevel.INFO));
 		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
 
@@ -108,7 +112,7 @@ public class UdpClient {
 				// 注册hander
 				ChannelPipeline pipe = ch.pipeline();
 				// 将业务处理器放到最后
-			    pipe.addLast(udpClientHandler);
+			    pipe.addLast(handler);
 
 			}
 
@@ -124,13 +128,18 @@ public class UdpClient {
 	 * @return
 	 */
 	public <T> RpcFuture<T> sendAsync(String type, Object payload) {
-		if (!started) {
-			connect();
-			started = true;
+		if (!started) {//未连接
+			try {
+				connect();
+				started = true;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				started = false;
+			}
 		}
 		String requestId = RequestId.next();
 		CommonMessage output = new CommonMessage(requestId, type, payload);
-		return udpClientHandler.send(output);
+		return handler.send(output);
 	}
 
 	/**
@@ -140,9 +149,10 @@ public class UdpClient {
 	 * @return
 	 */
 	public <T> T send(String type, Object payload) {
-		// 普通rpc请求,正常获取相应
+		// 普通rpc请求,正常获取响应
 		RpcFuture<T> future = sendAsync(type, payload);
 		try {
+			logger.info("future.get() .......");
 			return future.get();
 		} catch (InterruptedException | ExecutionException e) {
 			throw new RPCException(e);
@@ -152,14 +162,14 @@ public class UdpClient {
 
 	/**
 	 * udp连接到服务器， udp 发送心跳包，且有回应
+	 * @throws InterruptedException 
 	 *
 	 */
-	public void connect() {
-		try {
+	public void connect() throws InterruptedException {
 			if (channel == null || !channel.isActive()) {
 				ChannelFuture channelFuture = bootstrap.bind(0).sync();
 				channel = channelFuture.channel();
-				
+			}
 //				MessageOutput output = new MessageOutput(RequestId.next(), "heartbeat", "");
 //				ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
 //				writeStr(buf, output.getRequestId());
@@ -173,11 +183,7 @@ public class UdpClient {
 //		        }else {
 //		    		started = true;
 //		        }
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 	}
 
 	public void reconnect() {

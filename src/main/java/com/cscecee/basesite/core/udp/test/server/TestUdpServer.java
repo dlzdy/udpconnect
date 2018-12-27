@@ -1,4 +1,4 @@
-package com.cscecee.basesite.core.udp.test;
+package com.cscecee.basesite.core.udp.test.server;
 
 import com.cscecee.basesite.core.udp.server.UdpServer;
 

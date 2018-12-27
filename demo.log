@@ -1,493 +1,361 @@
-2018-12-23 19:41:48,020 [main] [io.netty.util.internal.logging.InternalLoggerFactory] [DEBUG] - Using SLF4J as the default logging framework
-2018-12-23 19:41:48,030 [main] [io.netty.channel.MultithreadEventLoopGroup] [DEBUG] - -Dio.netty.eventLoopThreads: 8
-2018-12-23 19:41:48,104 [main] [io.netty.channel.nio.NioEventLoop] [DEBUG] - -Dio.netty.noKeySetOptimization: false
-2018-12-23 19:41:48,109 [main] [io.netty.channel.nio.NioEventLoop] [DEBUG] - -Dio.netty.selectorAutoRebuildThreshold: 512
-2018-12-23 19:41:48,153 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - Platform: Windows
-2018-12-23 19:41:48,156 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - -Dio.netty.noUnsafe: false
-2018-12-23 19:41:48,157 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - Java version: 8
-2018-12-23 19:41:48,160 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - sun.misc.Unsafe.theUnsafe: available
-2018-12-23 19:41:48,163 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - sun.misc.Unsafe.copyMemory: available
-2018-12-23 19:41:48,165 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.Buffer.address: available
-2018-12-23 19:41:48,166 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - direct buffer constructor: available
-2018-12-23 19:41:48,168 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.Bits.unaligned: available, true
-2018-12-23 19:41:48,169 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
-2018-12-23 19:41:48,171 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.DirectByteBuffer.<init>(long, int): available
-2018-12-23 19:41:48,172 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - sun.misc.Unsafe: available
-2018-12-23 19:41:48,174 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.tmpdir: C:\Users\zhangdy\AppData\Local\Temp (java.io.tmpdir)
-2018-12-23 19:41:48,181 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.bitMode: 64 (sun.arch.data.model)
-2018-12-23 19:41:48,188 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.maxDirectMemory: 1808269312 bytes
-2018-12-23 19:41:48,194 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.uninitializedArrayAllocationThreshold: -1
-2018-12-23 19:41:48,198 [main] [io.netty.util.internal.CleanerJava6] [DEBUG] - java.nio.ByteBuffer.cleaner(): available
-2018-12-23 19:41:48,198 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.noPreferDirect: false
-2018-12-23 19:41:48,214 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - org.jctools-core.MpscChunkedArrayQueue: available
-2018-12-23 19:41:48,391 [main] [io.netty.util.internal.InternalThreadLocalMap] [DEBUG] - -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
-2018-12-23 19:41:48,392 [main] [io.netty.util.internal.InternalThreadLocalMap] [DEBUG] - -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
-2018-12-23 19:41:48,449 [main] [io.netty.channel.DefaultChannelId] [DEBUG] - -Dio.netty.processId: 10856 (auto-detected)
-2018-12-23 19:41:48,459 [main] [io.netty.util.NetUtil] [DEBUG] - -Djava.net.preferIPv4Stack: false
-2018-12-23 19:41:48,463 [main] [io.netty.util.NetUtil] [DEBUG] - -Djava.net.preferIPv6Addresses: false
-2018-12-23 19:41:48,678 [main] [io.netty.util.NetUtil] [DEBUG] - Loopback interface: [lo, Software Loopback Interface 1, 127.0.0.1] ({}, {})
-2018-12-23 19:41:48,680 [main] [io.netty.util.NetUtil] [DEBUG] - Failed to get SOMAXCONN from sysctl and file \proc\sys\net\core\somaxconn. Default: 200
-2018-12-23 19:41:48,886 [main] [io.netty.channel.DefaultChannelId] [DEBUG] - -Dio.netty.machineId: 00:00:00:00:00:00:00:e0 (auto-detected)
-2018-12-23 19:41:48,917 [main] [io.netty.util.ResourceLeakDetector] [DEBUG] - -Dio.netty.leakDetection.level: simple
-2018-12-23 19:41:48,918 [main] [io.netty.util.ResourceLeakDetector] [DEBUG] - -Dio.netty.leakDetection.targetRecords: 4
-2018-12-23 19:41:48,974 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.numHeapArenas: 8
-2018-12-23 19:41:48,975 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.numDirectArenas: 8
-2018-12-23 19:41:48,975 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.pageSize: 8192
-2018-12-23 19:41:48,976 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.maxOrder: 11
-2018-12-23 19:41:48,976 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.chunkSize: 16777216
-2018-12-23 19:41:48,976 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.tinyCacheSize: 512
-2018-12-23 19:41:48,978 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.smallCacheSize: 256
-2018-12-23 19:41:48,978 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.normalCacheSize: 64
-2018-12-23 19:41:48,978 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
-2018-12-23 19:41:48,979 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.cacheTrimInterval: 8192
-2018-12-23 19:41:48,979 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.useCacheForAllThreads: true
-2018-12-23 19:41:49,000 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.allocator.type: pooled
-2018-12-23 19:41:49,000 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.threadLocalDirectBufferSize: 0
-2018-12-23 19:41:49,001 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.maxThreadLocalCharBufferSize: 16384
-2018-12-23 19:41:49,037 [main] [io.netty.buffer.AbstractByteBuf] [DEBUG] - -Dio.netty.buffer.checkAccessible: true
-2018-12-23 19:41:49,037 [main] [io.netty.buffer.AbstractByteBuf] [DEBUG] - -Dio.netty.buffer.checkBounds: true
-2018-12-23 19:41:49,039 [main] [io.netty.util.ResourceLeakDetectorFactory] [DEBUG] - Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@56ef9176
-2018-12-23 19:41:49,047 [main] [io.netty.util.Recycler] [DEBUG] - -Dio.netty.recycler.maxCapacityPerThread: 4096
-2018-12-23 19:41:49,047 [main] [io.netty.util.Recycler] [DEBUG] - -Dio.netty.recycler.maxSharedCapacityFactor: 2
-2018-12-23 19:41:49,047 [main] [io.netty.util.Recycler] [DEBUG] - -Dio.netty.recycler.linkCapacity: 16
-2018-12-23 19:41:49,048 [main] [io.netty.util.Recycler] [DEBUG] - -Dio.netty.recycler.ratio: 8
-2018-12-23 19:41:49,073 [nioEventLoopGroup-2-1] [org.zln.netty.five.part07.UdpClientHandler] [DEBUG] - 谚语查询结果:只要功夫深,铁杵磨成针
-2018-12-23 19:41:51,282 [nioEventLoopGroup-2-1] [io.netty.buffer.PoolThreadCache] [DEBUG] - Freed 2 thread-local buffer(s) from thread: nioEventLoopGroup-2-1
-2018-12-23 19:42:34,780 [nioEventLoopGroup-2-1] [org.zln.netty.five.part07.UdpClientHandler] [INFO] - 谚语查询结果:老骥伏枥,志在千里.烈士暮年,壮心不已!
-2018-12-23 19:47:58,713 [nioEventLoopGroup-2-1] [org.zln.netty.five.part07.UdpClientHandler] [INFO] - 谚语查询结果:老骥伏枥,志在千里.烈士暮年,壮心不已!
-2018-12-23 19:48:28,111 [main] [io.netty.bootstrap.ServerBootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x8f1a842a]'
-2018-12-23 19:48:28,144 [nioEventLoopGroup-2-1] [io.netty.handler.logging.LoggingHandler] [INFO] - [id: 0x8f1a842a] REGISTERED
-2018-12-23 19:48:28,153 [nioEventLoopGroup-2-1] [io.netty.handler.logging.LoggingHandler] [INFO] - [id: 0x8f1a842a] BIND: 0.0.0.0/0.0.0.0:8800
-2018-12-23 19:48:28,158 [nioEventLoopGroup-2-1] [io.netty.handler.logging.LoggingHandler] [INFO] - [id: 0x8f1a842a, L:/0:0:0:0:0:0:0:0:8800] ACTIVE
-2018-12-23 19:50:27,261 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 19:50:31,901 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 19:51:22,985 [main] [io.netty.util.internal.logging.InternalLoggerFactory] [DEBUG] - Using SLF4J as the default logging framework
-2018-12-23 19:51:23,031 [main] [io.netty.channel.MultithreadEventLoopGroup] [DEBUG] - -Dio.netty.eventLoopThreads: 8
-2018-12-23 19:51:23,087 [main] [io.netty.channel.nio.NioEventLoop] [DEBUG] - -Dio.netty.noKeySetOptimization: false
-2018-12-23 19:51:23,090 [main] [io.netty.channel.nio.NioEventLoop] [DEBUG] - -Dio.netty.selectorAutoRebuildThreshold: 512
-2018-12-23 19:51:23,132 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - Platform: Windows
-2018-12-23 19:51:23,135 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - -Dio.netty.noUnsafe: false
-2018-12-23 19:51:23,136 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - Java version: 8
-2018-12-23 19:51:23,141 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - sun.misc.Unsafe.theUnsafe: available
-2018-12-23 19:51:23,143 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - sun.misc.Unsafe.copyMemory: available
-2018-12-23 19:51:23,145 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.Buffer.address: available
-2018-12-23 19:51:23,149 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - direct buffer constructor: available
-2018-12-23 19:51:23,151 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.Bits.unaligned: available, true
-2018-12-23 19:51:23,152 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
-2018-12-23 19:51:23,152 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.DirectByteBuffer.<init>(long, int): available
-2018-12-23 19:51:23,153 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - sun.misc.Unsafe: available
-2018-12-23 19:51:23,155 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.tmpdir: C:\Users\zhangdy\AppData\Local\Temp (java.io.tmpdir)
-2018-12-23 19:51:23,159 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.bitMode: 64 (sun.arch.data.model)
-2018-12-23 19:51:23,165 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.maxDirectMemory: 1808269312 bytes
-2018-12-23 19:51:23,166 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.uninitializedArrayAllocationThreshold: -1
-2018-12-23 19:51:23,168 [main] [io.netty.util.internal.CleanerJava6] [DEBUG] - java.nio.ByteBuffer.cleaner(): available
-2018-12-23 19:51:23,169 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.noPreferDirect: false
-2018-12-23 19:51:23,189 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - org.jctools-core.MpscChunkedArrayQueue: available
-2018-12-23 19:51:23,404 [main] [io.netty.channel.DefaultChannelId] [DEBUG] - -Dio.netty.processId: 7136 (auto-detected)
-2018-12-23 19:51:23,407 [main] [io.netty.util.NetUtil] [DEBUG] - -Djava.net.preferIPv4Stack: false
-2018-12-23 19:51:23,408 [main] [io.netty.util.NetUtil] [DEBUG] - -Djava.net.preferIPv6Addresses: false
-2018-12-23 19:51:23,554 [main] [io.netty.util.NetUtil] [DEBUG] - Loopback interface: [lo, Software Loopback Interface 1, 127.0.0.1] ({}, {})
-2018-12-23 19:51:23,556 [main] [io.netty.util.NetUtil] [DEBUG] - Failed to get SOMAXCONN from sysctl and file \proc\sys\net\core\somaxconn. Default: 200
-2018-12-23 19:51:23,727 [main] [io.netty.channel.DefaultChannelId] [DEBUG] - -Dio.netty.machineId: 00:00:00:00:00:00:00:e0 (auto-detected)
-2018-12-23 19:51:23,737 [main] [io.netty.util.internal.InternalThreadLocalMap] [DEBUG] - -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
-2018-12-23 19:51:23,738 [main] [io.netty.util.internal.InternalThreadLocalMap] [DEBUG] - -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
-2018-12-23 19:51:23,765 [main] [io.netty.util.ResourceLeakDetector] [DEBUG] - -Dio.netty.leakDetection.level: simple
-2018-12-23 19:51:23,766 [main] [io.netty.util.ResourceLeakDetector] [DEBUG] - -Dio.netty.leakDetection.targetRecords: 4
-2018-12-23 19:51:23,827 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.numHeapArenas: 8
-2018-12-23 19:51:23,827 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.numDirectArenas: 8
-2018-12-23 19:51:23,829 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.pageSize: 8192
-2018-12-23 19:51:23,830 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.maxOrder: 11
-2018-12-23 19:51:23,831 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.chunkSize: 16777216
-2018-12-23 19:51:23,832 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.tinyCacheSize: 512
-2018-12-23 19:51:23,833 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.smallCacheSize: 256
-2018-12-23 19:51:23,834 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.normalCacheSize: 64
-2018-12-23 19:51:23,834 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
-2018-12-23 19:51:23,835 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.cacheTrimInterval: 8192
-2018-12-23 19:51:23,835 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.useCacheForAllThreads: true
-2018-12-23 19:51:23,855 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.allocator.type: pooled
-2018-12-23 19:51:23,856 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.threadLocalDirectBufferSize: 0
-2018-12-23 19:51:23,856 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.maxThreadLocalCharBufferSize: 16384
-2018-12-23 19:51:23,889 [main] [io.netty.bootstrap.ServerBootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x9d661cab]'
-2018-12-23 19:51:23,920 [nioEventLoopGroup-2-1] [io.netty.handler.logging.LoggingHandler] [INFO] - [id: 0x9d661cab] REGISTERED
-2018-12-23 19:51:23,926 [nioEventLoopGroup-2-1] [io.netty.handler.logging.LoggingHandler] [INFO] - [id: 0x9d661cab] BIND: 0.0.0.0/0.0.0.0:8800
-2018-12-23 19:51:23,931 [nioEventLoopGroup-2-1] [io.netty.handler.logging.LoggingHandler] [INFO] - [id: 0x9d661cab] CLOSE
-2018-12-23 19:51:23,933 [nioEventLoopGroup-2-1] [io.netty.handler.logging.LoggingHandler] [INFO] - [id: 0x9d661cab] UNREGISTERED
-2018-12-23 19:51:35,071 [main] [io.netty.util.internal.logging.InternalLoggerFactory] [DEBUG] - Using SLF4J as the default logging framework
-2018-12-23 19:51:35,107 [main] [io.netty.channel.MultithreadEventLoopGroup] [DEBUG] - -Dio.netty.eventLoopThreads: 8
-2018-12-23 19:51:35,170 [main] [io.netty.channel.nio.NioEventLoop] [DEBUG] - -Dio.netty.noKeySetOptimization: false
-2018-12-23 19:51:35,175 [main] [io.netty.channel.nio.NioEventLoop] [DEBUG] - -Dio.netty.selectorAutoRebuildThreshold: 512
-2018-12-23 19:51:35,217 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - Platform: Windows
-2018-12-23 19:51:35,221 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - -Dio.netty.noUnsafe: false
-2018-12-23 19:51:35,222 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - Java version: 8
-2018-12-23 19:51:35,226 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - sun.misc.Unsafe.theUnsafe: available
-2018-12-23 19:51:35,229 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - sun.misc.Unsafe.copyMemory: available
-2018-12-23 19:51:35,231 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.Buffer.address: available
-2018-12-23 19:51:35,232 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - direct buffer constructor: available
-2018-12-23 19:51:35,234 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.Bits.unaligned: available, true
-2018-12-23 19:51:35,235 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
-2018-12-23 19:51:35,235 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.DirectByteBuffer.<init>(long, int): available
-2018-12-23 19:51:35,235 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - sun.misc.Unsafe: available
-2018-12-23 19:51:35,238 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.tmpdir: C:\Users\zhangdy\AppData\Local\Temp (java.io.tmpdir)
-2018-12-23 19:51:35,241 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.bitMode: 64 (sun.arch.data.model)
-2018-12-23 19:51:35,248 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.maxDirectMemory: 1808269312 bytes
-2018-12-23 19:51:35,248 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.uninitializedArrayAllocationThreshold: -1
-2018-12-23 19:51:35,251 [main] [io.netty.util.internal.CleanerJava6] [DEBUG] - java.nio.ByteBuffer.cleaner(): available
-2018-12-23 19:51:35,251 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.noPreferDirect: false
-2018-12-23 19:51:35,283 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - org.jctools-core.MpscChunkedArrayQueue: available
-2018-12-23 19:51:35,524 [main] [io.netty.channel.DefaultChannelId] [DEBUG] - -Dio.netty.processId: 10016 (auto-detected)
-2018-12-23 19:51:35,528 [main] [io.netty.util.NetUtil] [DEBUG] - -Djava.net.preferIPv4Stack: false
-2018-12-23 19:51:35,528 [main] [io.netty.util.NetUtil] [DEBUG] - -Djava.net.preferIPv6Addresses: false
-2018-12-23 19:51:35,684 [main] [io.netty.util.NetUtil] [DEBUG] - Loopback interface: [lo, Software Loopback Interface 1, 127.0.0.1] ({}, {})
-2018-12-23 19:51:35,686 [main] [io.netty.util.NetUtil] [DEBUG] - Failed to get SOMAXCONN from sysctl and file \proc\sys\net\core\somaxconn. Default: 200
-2018-12-23 19:51:35,864 [main] [io.netty.channel.DefaultChannelId] [DEBUG] - -Dio.netty.machineId: 00:00:00:00:00:00:00:e0 (auto-detected)
-2018-12-23 19:51:35,876 [main] [io.netty.util.internal.InternalThreadLocalMap] [DEBUG] - -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
-2018-12-23 19:51:35,877 [main] [io.netty.util.internal.InternalThreadLocalMap] [DEBUG] - -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
-2018-12-23 19:51:35,906 [main] [io.netty.util.ResourceLeakDetector] [DEBUG] - -Dio.netty.leakDetection.level: simple
-2018-12-23 19:51:35,906 [main] [io.netty.util.ResourceLeakDetector] [DEBUG] - -Dio.netty.leakDetection.targetRecords: 4
-2018-12-23 19:51:35,952 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.numHeapArenas: 8
-2018-12-23 19:51:35,953 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.numDirectArenas: 8
-2018-12-23 19:51:35,953 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.pageSize: 8192
-2018-12-23 19:51:35,953 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.maxOrder: 11
-2018-12-23 19:51:35,954 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.chunkSize: 16777216
-2018-12-23 19:51:35,954 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.tinyCacheSize: 512
-2018-12-23 19:51:35,954 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.smallCacheSize: 256
-2018-12-23 19:51:35,955 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.normalCacheSize: 64
-2018-12-23 19:51:35,955 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
-2018-12-23 19:51:35,955 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.cacheTrimInterval: 8192
-2018-12-23 19:51:35,956 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.useCacheForAllThreads: true
-2018-12-23 19:51:35,975 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.allocator.type: pooled
-2018-12-23 19:51:35,976 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.threadLocalDirectBufferSize: 0
-2018-12-23 19:51:35,977 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.maxThreadLocalCharBufferSize: 16384
-2018-12-23 19:51:35,997 [main] [io.netty.bootstrap.ServerBootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0xc81ce51b]'
-2018-12-23 19:51:36,020 [nioEventLoopGroup-2-1] [io.netty.handler.logging.LoggingHandler] [INFO] - [id: 0xc81ce51b] REGISTERED
-2018-12-23 19:51:36,032 [nioEventLoopGroup-2-1] [io.netty.handler.logging.LoggingHandler] [INFO] - [id: 0xc81ce51b] BIND: 0.0.0.0/0.0.0.0:8800
-2018-12-23 19:51:36,036 [nioEventLoopGroup-2-1] [io.netty.handler.logging.LoggingHandler] [INFO] - [id: 0xc81ce51b, L:/0:0:0:0:0:0:0:0:8800] ACTIVE
-2018-12-23 19:52:04,909 [main] [io.netty.util.internal.logging.InternalLoggerFactory] [DEBUG] - Using SLF4J as the default logging framework
-2018-12-23 19:52:04,920 [main] [io.netty.channel.MultithreadEventLoopGroup] [DEBUG] - -Dio.netty.eventLoopThreads: 8
-2018-12-23 19:52:04,999 [main] [io.netty.channel.nio.NioEventLoop] [DEBUG] - -Dio.netty.noKeySetOptimization: false
-2018-12-23 19:52:05,004 [main] [io.netty.channel.nio.NioEventLoop] [DEBUG] - -Dio.netty.selectorAutoRebuildThreshold: 512
-2018-12-23 19:52:05,054 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - Platform: Windows
-2018-12-23 19:52:05,057 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - -Dio.netty.noUnsafe: false
-2018-12-23 19:52:05,057 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - Java version: 8
-2018-12-23 19:52:05,062 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - sun.misc.Unsafe.theUnsafe: available
-2018-12-23 19:52:05,064 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - sun.misc.Unsafe.copyMemory: available
-2018-12-23 19:52:05,066 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.Buffer.address: available
-2018-12-23 19:52:05,067 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - direct buffer constructor: available
-2018-12-23 19:52:05,069 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.Bits.unaligned: available, true
-2018-12-23 19:52:05,069 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
-2018-12-23 19:52:05,069 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.DirectByteBuffer.<init>(long, int): available
-2018-12-23 19:52:05,070 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - sun.misc.Unsafe: available
-2018-12-23 19:52:05,071 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.tmpdir: C:\Users\zhangdy\AppData\Local\Temp (java.io.tmpdir)
-2018-12-23 19:52:05,075 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.bitMode: 64 (sun.arch.data.model)
-2018-12-23 19:52:05,081 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.maxDirectMemory: 1808269312 bytes
-2018-12-23 19:52:05,082 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.uninitializedArrayAllocationThreshold: -1
-2018-12-23 19:52:05,086 [main] [io.netty.util.internal.CleanerJava6] [DEBUG] - java.nio.ByteBuffer.cleaner(): available
-2018-12-23 19:52:05,086 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.noPreferDirect: false
-2018-12-23 19:52:05,108 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - org.jctools-core.MpscChunkedArrayQueue: available
-2018-12-23 19:52:05,282 [main] [io.netty.util.internal.InternalThreadLocalMap] [DEBUG] - -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
-2018-12-23 19:52:05,283 [main] [io.netty.util.internal.InternalThreadLocalMap] [DEBUG] - -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
-2018-12-23 19:52:05,317 [main] [io.netty.channel.DefaultChannelId] [DEBUG] - -Dio.netty.processId: 11908 (auto-detected)
-2018-12-23 19:52:05,320 [main] [io.netty.util.NetUtil] [DEBUG] - -Djava.net.preferIPv4Stack: false
-2018-12-23 19:52:05,321 [main] [io.netty.util.NetUtil] [DEBUG] - -Djava.net.preferIPv6Addresses: false
-2018-12-23 19:52:05,459 [main] [io.netty.util.NetUtil] [DEBUG] - Loopback interface: [lo, Software Loopback Interface 1, 127.0.0.1] ({}, {})
-2018-12-23 19:52:05,463 [main] [io.netty.util.NetUtil] [DEBUG] - Failed to get SOMAXCONN from sysctl and file \proc\sys\net\core\somaxconn. Default: 200
-2018-12-23 19:52:05,635 [main] [io.netty.channel.DefaultChannelId] [DEBUG] - -Dio.netty.machineId: 00:00:00:00:00:00:00:e0 (auto-detected)
-2018-12-23 19:52:05,666 [main] [io.netty.util.ResourceLeakDetector] [DEBUG] - -Dio.netty.leakDetection.level: simple
-2018-12-23 19:52:05,667 [main] [io.netty.util.ResourceLeakDetector] [DEBUG] - -Dio.netty.leakDetection.targetRecords: 4
-2018-12-23 19:52:05,711 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.numHeapArenas: 8
-2018-12-23 19:52:05,711 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.numDirectArenas: 8
-2018-12-23 19:52:05,712 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.pageSize: 8192
-2018-12-23 19:52:05,712 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.maxOrder: 11
-2018-12-23 19:52:05,713 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.chunkSize: 16777216
-2018-12-23 19:52:05,713 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.tinyCacheSize: 512
-2018-12-23 19:52:05,714 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.smallCacheSize: 256
-2018-12-23 19:52:05,714 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.normalCacheSize: 64
-2018-12-23 19:52:05,715 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
-2018-12-23 19:52:05,715 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.cacheTrimInterval: 8192
-2018-12-23 19:52:05,715 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.useCacheForAllThreads: true
-2018-12-23 19:52:05,732 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.allocator.type: pooled
-2018-12-23 19:52:05,733 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.threadLocalDirectBufferSize: 0
-2018-12-23 19:52:05,733 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.maxThreadLocalCharBufferSize: 16384
-2018-12-23 19:53:55,727 [main] [io.netty.util.internal.logging.InternalLoggerFactory] [DEBUG] - Using SLF4J as the default logging framework
-2018-12-23 19:53:55,774 [main] [io.netty.channel.MultithreadEventLoopGroup] [DEBUG] - -Dio.netty.eventLoopThreads: 8
-2018-12-23 19:53:55,838 [main] [io.netty.channel.nio.NioEventLoop] [DEBUG] - -Dio.netty.noKeySetOptimization: false
-2018-12-23 19:53:55,842 [main] [io.netty.channel.nio.NioEventLoop] [DEBUG] - -Dio.netty.selectorAutoRebuildThreshold: 512
-2018-12-23 19:53:55,879 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - Platform: Windows
-2018-12-23 19:53:55,883 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - -Dio.netty.noUnsafe: false
-2018-12-23 19:53:55,884 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - Java version: 8
-2018-12-23 19:53:55,888 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - sun.misc.Unsafe.theUnsafe: available
-2018-12-23 19:53:55,891 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - sun.misc.Unsafe.copyMemory: available
-2018-12-23 19:53:55,893 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.Buffer.address: available
-2018-12-23 19:53:55,895 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - direct buffer constructor: available
-2018-12-23 19:53:55,898 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.Bits.unaligned: available, true
-2018-12-23 19:53:55,899 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
-2018-12-23 19:53:55,899 [main] [io.netty.util.internal.PlatformDependent0] [DEBUG] - java.nio.DirectByteBuffer.<init>(long, int): available
-2018-12-23 19:53:55,900 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - sun.misc.Unsafe: available
-2018-12-23 19:53:55,902 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.tmpdir: C:\Users\zhangdy\AppData\Local\Temp (java.io.tmpdir)
-2018-12-23 19:53:55,905 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.bitMode: 64 (sun.arch.data.model)
-2018-12-23 19:53:55,910 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.maxDirectMemory: 1808269312 bytes
-2018-12-23 19:53:55,910 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.uninitializedArrayAllocationThreshold: -1
-2018-12-23 19:53:55,913 [main] [io.netty.util.internal.CleanerJava6] [DEBUG] - java.nio.ByteBuffer.cleaner(): available
-2018-12-23 19:53:55,913 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - -Dio.netty.noPreferDirect: false
-2018-12-23 19:53:55,933 [main] [io.netty.util.internal.PlatformDependent] [DEBUG] - org.jctools-core.MpscChunkedArrayQueue: available
-2018-12-23 19:53:56,141 [main] [io.netty.channel.DefaultChannelId] [DEBUG] - -Dio.netty.processId: 12088 (auto-detected)
-2018-12-23 19:53:56,145 [main] [io.netty.util.NetUtil] [DEBUG] - -Djava.net.preferIPv4Stack: false
-2018-12-23 19:53:56,146 [main] [io.netty.util.NetUtil] [DEBUG] - -Djava.net.preferIPv6Addresses: false
-2018-12-23 19:53:56,291 [main] [io.netty.util.NetUtil] [DEBUG] - Loopback interface: [lo, Software Loopback Interface 1, 127.0.0.1] ({}, {})
-2018-12-23 19:53:56,292 [main] [io.netty.util.NetUtil] [DEBUG] - Failed to get SOMAXCONN from sysctl and file \proc\sys\net\core\somaxconn. Default: 200
-2018-12-23 19:53:56,487 [main] [io.netty.channel.DefaultChannelId] [DEBUG] - -Dio.netty.machineId: 00:00:00:00:00:00:00:e0 (auto-detected)
-2018-12-23 19:53:56,499 [main] [io.netty.util.internal.InternalThreadLocalMap] [DEBUG] - -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
-2018-12-23 19:53:56,499 [main] [io.netty.util.internal.InternalThreadLocalMap] [DEBUG] - -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
-2018-12-23 19:53:56,522 [main] [io.netty.util.ResourceLeakDetector] [DEBUG] - -Dio.netty.leakDetection.level: simple
-2018-12-23 19:53:56,522 [main] [io.netty.util.ResourceLeakDetector] [DEBUG] - -Dio.netty.leakDetection.targetRecords: 4
-2018-12-23 19:53:56,577 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.numHeapArenas: 8
-2018-12-23 19:53:56,578 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.numDirectArenas: 8
-2018-12-23 19:53:56,578 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.pageSize: 8192
-2018-12-23 19:53:56,579 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.maxOrder: 11
-2018-12-23 19:53:56,579 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.chunkSize: 16777216
-2018-12-23 19:53:56,579 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.tinyCacheSize: 512
-2018-12-23 19:53:56,580 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.smallCacheSize: 256
-2018-12-23 19:53:56,580 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.normalCacheSize: 64
-2018-12-23 19:53:56,580 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
-2018-12-23 19:53:56,581 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.cacheTrimInterval: 8192
-2018-12-23 19:53:56,581 [main] [io.netty.buffer.PooledByteBufAllocator] [DEBUG] - -Dio.netty.allocator.useCacheForAllThreads: true
-2018-12-23 19:53:56,602 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.allocator.type: pooled
-2018-12-23 19:53:56,602 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.threadLocalDirectBufferSize: 0
-2018-12-23 19:53:56,603 [main] [io.netty.buffer.ByteBufUtil] [DEBUG] - -Dio.netty.maxThreadLocalCharBufferSize: 16384
-2018-12-23 19:53:56,629 [main] [io.netty.bootstrap.ServerBootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0xf81f5873]'
-2018-12-23 19:54:29,702 [main] [io.netty.bootstrap.ServerBootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x3830c15c]'
-2018-12-23 19:55:49,205 [main] [io.netty.bootstrap.ServerBootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x2499d45f]'
-2018-12-23 19:56:00,096 [main] [io.netty.bootstrap.ServerBootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x2e18a4c3]'
-2018-12-23 19:56:11,890 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 19:56:18,099 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 21:01:03,875 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 21:01:11,566 [nioEventLoopGroup-3-1] [org.zln.netty.five.part07.UdpClientHandler] [INFO] - 谚语查询结果:洛阳亲友如相问,一片冰心在玉壶
-2018-12-23 21:01:34,369 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 21:01:34,410 [nioEventLoopGroup-3-1] [org.zln.netty.five.part07.UdpClientHandler] [INFO] - 谚语查询结果:一寸光阴一寸金,寸金难买寸光阴
-2018-12-23 21:02:17,432 [nioEventLoopGroup-2-1] [org.zln.netty.five.part07.UdpClientHandler] [INFO] - 谚语查询结果:洛阳亲友如相问,一片冰心在玉壶
-2018-12-23 21:05:45,921 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x6e80eb51]'
-2018-12-23 21:06:20,497 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0xfdefe520]'
-2018-12-23 21:06:35,620 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 21:08:12,156 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x0f1e854e]'
-2018-12-23 21:09:15,563 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0xe7b4d5fc]'
-2018-12-23 21:53:12,075 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x030ac1e0]'
-2018-12-23 21:53:36,801 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 21:54:12,947 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 21:54:40,020 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x11e3b232]'
-2018-12-23 21:55:26,317 [main] [io.netty.bootstrap.Bootstrap] [WARN] - Unknown channel option 'SO_BROADCAST' for channel '[id: 0x1c84cb53]'
-2018-12-23 22:05:48,877 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:20:19,658 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:20:49,677 [nioEventLoopGroup-2-1] [org.zln.netty.five.part07.UdpClientHandler] [INFO] - 谚语查询结果:老骥伏枥,志在千里.烈士暮年,壮心不已!
-2018-12-23 22:21:21,378 [nioEventLoopGroup-2-1] [io.netty.channel.ChannelInitializer] [WARN] - Failed to initialize a channel. Closing: [id: 0xf9555750]
-java.lang.ClassCastException: io.netty.channel.socket.nio.NioDatagramChannel cannot be cast to io.netty.channel.socket.SocketChannel
-	at lianxi.udp.server.UdpRpcServer$1.initChannel(UdpRpcServer.java:1)
-	at io.netty.channel.ChannelInitializer.initChannel(ChannelInitializer.java:115)
-	at io.netty.channel.ChannelInitializer.handlerAdded(ChannelInitializer.java:107)
-	at io.netty.channel.DefaultChannelPipeline.callHandlerAdded0(DefaultChannelPipeline.java:637)
-	at io.netty.channel.DefaultChannelPipeline.access$000(DefaultChannelPipeline.java:46)
-	at io.netty.channel.DefaultChannelPipeline$PendingHandlerAddedTask.execute(DefaultChannelPipeline.java:1487)
-	at io.netty.channel.DefaultChannelPipeline.callHandlerAddedForAllHandlers(DefaultChannelPipeline.java:1161)
-	at io.netty.channel.DefaultChannelPipeline.invokeHandlerAddedIfNeeded(DefaultChannelPipeline.java:686)
-	at io.netty.channel.AbstractChannel$AbstractUnsafe.register0(AbstractChannel.java:514)
-	at io.netty.channel.AbstractChannel$AbstractUnsafe.access$200(AbstractChannel.java:427)
-	at io.netty.channel.AbstractChannel$AbstractUnsafe$1.run(AbstractChannel.java:486)
-	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
-	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:404)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:474)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.lang.Thread.run(Unknown Source)
-2018-12-23 22:37:13,892 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:37:23,861 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:41:17,694 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:42:41,551 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:52:31,685 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-23 22:52:42,318 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:53:33,195 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:53:50,241 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:54:03,163 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:54:30,387 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:55:14,973 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:55:22,008 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-23 22:55:32,025 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:55:49,020 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-23 22:55:57,555 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:56:50,425 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-23 22:56:57,804 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:57:27,860 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-23 22:57:35,041 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 22:57:50,077 [nioEventLoopGroup-2-1] [org.zln.netty.five.part07.UdpClientHandler] [INFO] - 谚语查询结果:老骥伏枥,志在千里.烈士暮年,壮心不已!
-2018-12-23 23:04:30,211 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-23 23:04:39,971 [main] [org.zln.netty.five.part07.UdpClient] [INFO] - 查询超时
-2018-12-23 23:05:01,784 [nioEventLoopGroup-2-1] [io.netty.channel.ChannelInitializer] [WARN] - Failed to initialize a channel. Closing: [id: 0xc2e2f82f]
-java.lang.ClassCastException: io.netty.channel.socket.nio.NioDatagramChannel cannot be cast to io.netty.channel.socket.SocketChannel
-	at lianxi.udp.client.UdpRpcClient$1.initChannel(UdpRpcClient.java:1)
-	at io.netty.channel.ChannelInitializer.initChannel(ChannelInitializer.java:115)
-	at io.netty.channel.ChannelInitializer.handlerAdded(ChannelInitializer.java:107)
-	at io.netty.channel.DefaultChannelPipeline.callHandlerAdded0(DefaultChannelPipeline.java:637)
-	at io.netty.channel.DefaultChannelPipeline.access$000(DefaultChannelPipeline.java:46)
-	at io.netty.channel.DefaultChannelPipeline$PendingHandlerAddedTask.execute(DefaultChannelPipeline.java:1487)
-	at io.netty.channel.DefaultChannelPipeline.callHandlerAddedForAllHandlers(DefaultChannelPipeline.java:1161)
-	at io.netty.channel.DefaultChannelPipeline.invokeHandlerAddedIfNeeded(DefaultChannelPipeline.java:686)
-	at io.netty.channel.AbstractChannel$AbstractUnsafe.register0(AbstractChannel.java:514)
-	at io.netty.channel.AbstractChannel$AbstractUnsafe.access$200(AbstractChannel.java:427)
-	at io.netty.channel.AbstractChannel$AbstractUnsafe$1.run(AbstractChannel.java:486)
-	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
-	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:404)
-	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:474)
-	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
-	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.lang.Thread.run(Unknown Source)
-2018-12-23 23:06:19,761 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-23 23:07:10,198 [nioEventLoopGroup-2-1] [lianxi.udp.client.UdpRpcClient] [INFO] - Sender datagramPacket result : true
-2018-12-23 23:08:25,090 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-23 23:12:46,877 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-23 23:14:25,417 [nioEventLoopGroup-2-1] [lianxi.udp.client.UdpRpcClient] [INFO] - Sender datagramPacket result : false
-2018-12-23 23:49:32,331 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-23 23:50:31,486 [nioEventLoopGroup-2-1] [lianxi.udp.client.UdpRpcClient] [INFO] - Sender datagramPacket result : false
-2018-12-23 23:51:07,215 [nioEventLoopGroup-2-1] [lianxi.udp.client.UdpRpcClient] [INFO] - Sender datagramPacket result : false
-2018-12-23 23:59:05,397 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-24 00:00:33,706 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
-2018-12-24 11:16:56,759 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-24 13:23:27,926 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
-2018-12-24 13:27:55,966 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-24 13:28:04,849 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
-2018-12-24 13:28:16,317 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
-2018-12-24 13:36:01,133 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-24 13:49:01,177 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
-2018-12-24 13:49:17,085 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
-2018-12-24 20:25:30,000 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-24 20:33:17,133 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
-2018-12-24 20:33:41,389 [nioEventLoopGroup-2-1] [io.netty.channel.DefaultChannelPipeline] [WARN] - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
-java.net.PortUnreachableException
-	at sun.nio.ch.DatagramChannelImpl.receive0(Native Method)
-	at sun.nio.ch.DatagramChannelImpl.receiveIntoNativeBuffer(Unknown Source)
-	at sun.nio.ch.DatagramChannelImpl.receive(Unknown Source)
-	at sun.nio.ch.DatagramChannelImpl.receive(Unknown Source)
-	at io.netty.channel.socket.nio.NioDatagramChannel.doReadMessages(NioDatagramChannel.java:250)
-	at io.netty.channel.nio.AbstractNioMessageChannel$NioMessageUnsafe.read(AbstractNioMessageChannel.java:75)
-	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:656)
+2018-12-27 10:57:38,004 [main] [com.cscecee.basesite.core.udp.server.UdpServer] [INFO] - udp server is running ......
+2018-12-27 11:19:07,679 [main] [com.cscecee.basesite.core.udp.server.UdpServer] [INFO] - udp server is running ......
+2018-12-27 13:22:52,039 [main] [com.cscecee.basesite.core.udp.server.UdpServer] [INFO] - udp server is running ......
+2018-12-27 13:55:39,847 [main] [com.cscecee.basesite.core.udp.server.UdpServer] [INFO] - udp server is running ......
+2018-12-27 13:55:41,610 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1
+2018-12-27 13:58:35,602 [main] [com.cscecee.basesite.core.udp.server.UdpServer] [INFO] - udp server is running ......
+2018-12-27 13:58:39,516 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>2
+2018-12-27 14:02:45,941 [main] [com.cscecee.basesite.core.udp.server.UdpServer] [INFO] - udp server is running ......
+2018-12-27 14:02:52,685 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>2
+2018-12-27 14:11:59,434 [main] [com.cscecee.basesite.core.udp.server.UdpServer] [INFO] - udp server is running ......
+2018-12-27 14:12:09,979 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>2
+2018-12-27 14:19:47,745 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>2
+2018-12-27 14:22:35,488 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>2
+2018-12-27 14:22:47,017 [rpc-0] [com.cscecee.basesite.core.udp.test.client.FibRespHandler] [INFO] - receive fib_res2
+2018-12-27 14:23:09,984 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1
+2018-12-27 14:23:16,606 [rpc-0] [com.cscecee.basesite.core.udp.test.client.FibRespHandler] [INFO] - receive fib_res1
+2018-12-27 14:24:03,999 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1
+2018-12-27 14:24:04,008 [rpc-0] [com.cscecee.basesite.core.udp.test.client.FibRespHandler] [INFO] - receive fib_res = 1
+2018-12-27 14:25:52,655 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1
+2018-12-27 14:25:52,664 [rpc-0] [com.cscecee.basesite.core.udp.test.client.FibRespHandler] [INFO] - receive fib_res = 1
+2018-12-27 14:31:28,516 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 14:31:29,461 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1
+2018-12-27 14:31:29,469 [rpc-0] [com.cscecee.basesite.core.udp.test.client.FibRespHandler] [INFO] - receive fib_res = 1
+2018-12-27 14:31:32,428 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 14:34:48,465 [main] [io.netty.bootstrap.ServerBootstrap] [WARN] - Unknown channel option 'TCP_NODELAY' for channel '[id: 0x9863c4f3]'
+2018-12-27 14:34:48,481 [main] [lianxi.tcp.server.RPCServer] [WARN] - server started @ localhost:8888
+
+2018-12-27 14:34:55,247 [nioEventLoopGroup-2-2] [lianxi.tcp.server.MessageCollector] [INFO] - connection comes
+2018-12-27 14:35:04,925 [nioEventLoopGroup-2-2] [lianxi.tcp.server.MessageCollector] [INFO] - connection leaves
+2018-12-27 14:35:36,410 [nioEventLoopGroup-2-1] [lianxi.tcp.server.MessageCollector] [INFO] - connection comes
+2018-12-27 14:36:36,425 [nioEventLoopGroup-2-1] [lianxi.tcp.server.MessageCollector] [INFO] - connection leaves
+2018-12-27 14:36:37,442 [nioEventLoopGroup-2-2] [lianxi.tcp.server.MessageCollector] [INFO] - connection comes
+2018-12-27 14:37:01,436 [nioEventLoopGroup-2-1] [lianxi.tcp.client.RPCClient] [ERROR] - connect localhost:8888 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:8888
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:716)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
 	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
 	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
 	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
 	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
 	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-	at java.lang.Thread.run(Unknown Source)
-2018-12-24 20:35:00,923 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-24 20:35:16,396 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
-2018-12-24 20:35:42,156 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
-2018-12-24 21:46:04,808 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
-2018-12-24 21:49:01,137 [main] [lianxi.udp.client.UdpRpcClient] [INFO] - 查询超时
-2018-12-24 23:51:20,422 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
-2018-12-24 23:52:13,735 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
-2018-12-24 23:59:31,783 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-24 23:59:56,220 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 00:00:14,221 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
-2018-12-25 00:00:34,513 [rpc-0] [lianxi.tcp.server.DefaultHandler] [ERROR] - unrecognized message type f3ba9bee40d843ccb28a56fdac41fa40 comes
-2018-12-25 00:00:36,058 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection leaves
-2018-12-25 00:00:47,842 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
-2018-12-25 00:01:06,095 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
-2018-12-25 00:01:32,481 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 00:02:36,607 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 00:02:53,164 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 00:03:44,444 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 00:04:55,519 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 00:06:13,975 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 00:06:51,485 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
-2018-12-25 00:07:55,376 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 00:08:00,734 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 00:08:08,562 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 00:08:08,563 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 00:08:16,420 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 00:08:16,420 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 00:08:22,581 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 00:08:22,582 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 00:09:45,552 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 00:10:06,271 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 12:16:30,687 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 12:16:30,687 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 12:18:26,646 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
-2018-12-25 12:19:43,766 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes
-2018-12-25 12:19:46,775 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
-2018-12-25 12:20:46,548 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes
-2018-12-25 12:20:49,557 [main] [lianxi.udp.client.UdpRpcClient] [WARN] - connect failed
-2018-12-25 12:21:00,793 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 12:21:00,793 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 12:28:22,028 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes
-2018-12-25 12:28:45,819 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes
-2018-12-25 12:28:49,804 [rpc-0] [lianxi.tcp.server.DefaultHandler] [ERROR] - unrecognized message type f917a43126184cb9aee4f441240c8e7c comes
-2018-12-25 12:28:49,805 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection leaves
-2018-12-25 12:29:22,539 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes
-2018-12-25 12:34:46,027 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes
-2018-12-25 13:56:41,429 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comesnull
-2018-12-25 13:57:00,492 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comesnull
-2018-12-25 14:05:41,369 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 14:05:57,947 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 14:07:45,989 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 14:07:48,553 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 15:59:29,296 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 15:59:29,304 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 16:09:59,027 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 16:09:59,036 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 16:12:05,857 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 16:12:05,864 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 16:12:08,301 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 16:12:08,310 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 16:12:24,043 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 16:12:24,049 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 16:12:41,143 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 16:12:41,152 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 16:16:23,008 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 16:16:23,015 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 16:18:58,960 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 16:18:58,969 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 16:32:27,655 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 16:32:27,664 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 16:38:38,879 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 16:38:38,886 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 16:39:00,144 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 16:39:00,152 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 16:40:26,492 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 16:40:27,867 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 16:40:40,718 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 16:40:40,728 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 17:13:45,876 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 17:13:50,398 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 17:13:54,847 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 17:13:54,855 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 17:14:41,060 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 17:14:41,067 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 17:15:20,023 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 17:15:22,285 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 17:15:27,175 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 17:15:27,185 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 17:15:56,316 [rpc-0] [lianxi.tcp.server.DefaultHandler] [ERROR] - unrecognized message type 9d8e2225a00542fcbbc43bc8d80b17ad comes
-2018-12-25 17:15:56,326 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection leaves
-2018-12-25 17:16:11,592 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 17:16:11,599 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 17:16:52,924 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 17:16:52,932 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 17:17:50,805 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 17:17:50,813 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 17:18:42,564 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 17:18:46,638 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 17:18:55,151 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 17:18:55,160 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 17:21:38,866 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 17:21:38,866 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 17:21:44,617 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 17:21:44,626 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 17:23:05,113 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 17:23:05,114 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 17:23:24,778 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 17:23:24,785 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 17:24:01,260 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 17:24:01,260 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 17:24:09,355 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 17:24:09,362 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 17:24:11,851 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - newThread:rpc-0
-2018-12-25 17:37:30,899 [main] [lianxi.tcp.server.RPCServer] [INFO] - udp server is running ......
-2018-12-25 17:37:30,900 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - connection comes
-2018-12-25 17:38:06,459 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - 注册事件
-2018-12-25 17:38:06,466 [nioEventLoopGroup-3-1] [lianxi.udp.client.UdpClientMessageHandler] [INFO] - connection comes, null
-2018-12-25 17:56:10,597 [nioEventLoopGroup-2-1] [lianxi.udp.server.UdpServerMessageHandler] [INFO] - newThread:rpc-0
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused: no further information
+	... 11 more
+2018-12-27 14:37:03,436 [nioEventLoopGroup-2-1] [lianxi.tcp.client.RPCClient] [ERROR] - connect localhost:8888 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:8888
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:716)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused: no further information
+	... 11 more
+2018-12-27 14:37:05,440 [nioEventLoopGroup-2-1] [lianxi.tcp.client.RPCClient] [ERROR] - connect localhost:8888 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:8888
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:716)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused: no further information
+	... 11 more
+2018-12-27 14:37:07,442 [nioEventLoopGroup-2-1] [lianxi.tcp.client.RPCClient] [ERROR] - connect localhost:8888 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:8888
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:716)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused: no further information
+	... 11 more
+2018-12-27 14:37:09,446 [nioEventLoopGroup-2-1] [lianxi.tcp.client.RPCClient] [ERROR] - connect localhost:8888 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:8888
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:716)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused: no further information
+	... 11 more
+2018-12-27 14:37:11,460 [nioEventLoopGroup-2-1] [lianxi.tcp.client.RPCClient] [ERROR] - connect localhost:8888 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:8888
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:716)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused: no further information
+	... 11 more
+2018-12-27 14:37:13,461 [nioEventLoopGroup-2-1] [lianxi.tcp.client.RPCClient] [ERROR] - connect localhost:8888 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:8888
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:716)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused: no further information
+	... 11 more
+2018-12-27 14:37:15,464 [nioEventLoopGroup-2-1] [lianxi.tcp.client.RPCClient] [ERROR] - connect localhost:8888 failure
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:8888
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:716)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:591)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:508)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:470)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:909)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.ConnectException: Connection refused: no further information
+	... 11 more
+2018-12-27 14:39:55,314 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 14:39:56,255 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1
+2018-12-27 14:39:59,922 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 14:40:01,914 [rpc-0] [com.cscecee.basesite.core.udp.test.client.FibRespHandler] [INFO] - receive fib_res = 1
+2018-12-27 14:55:56,775 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 14:55:57,713 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1
+2018-12-27 14:56:00,927 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:03:29,858 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:03:30,876 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1
+2018-12-27 15:07:24,202 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:07:37,657 [main] [com.cscecee.basesite.core.udp.server.UdpServer] [INFO] - udp server is running ......
+2018-12-27 15:09:27,426 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:09:28,410 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>cc230e1248a9416ba4079614a02376f8
+2018-12-27 15:09:28,441 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1
+2018-12-27 15:09:28,446 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<cc230e1248a9416ba4079614a02376f8
+2018-12-27 15:09:34,076 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:09:44,077 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = null
+2018-12-27 15:10:39,073 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:10:40,044 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>aab7b48389314fc98a1d69a3f66987f2
+2018-12-27 15:10:40,048 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1
+2018-12-27 15:10:40,053 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<aab7b48389314fc98a1d69a3f66987f2
+2018-12-27 15:10:45,884 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:10:51,628 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 1
+2018-12-27 15:12:17,685 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:12:18,683 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:12:18,683 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>9696e9473d994cb3a4c95223b340d17f
+2018-12-27 15:12:18,688 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1
+2018-12-27 15:12:18,692 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<9696e9473d994cb3a4c95223b340d17f
+2018-12-27 15:12:22,740 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 1
+2018-12-27 15:12:55,646 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:12:56,583 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:12:56,583 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>9ab15f513dbb42a48122c0377f9e26f8
+2018-12-27 15:12:56,588 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1
+2018-12-27 15:12:56,593 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<9ab15f513dbb42a48122c0377f9e26f8
+2018-12-27 15:12:56,593 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 1
+2018-12-27 15:13:02,480 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:02,480 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:02,480 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>8d848efea16a416087b4a7091ba1d545
+2018-12-27 15:13:02,481 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1
+2018-12-27 15:13:02,482 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<8d848efea16a416087b4a7091ba1d545
+2018-12-27 15:13:02,482 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 1
+2018-12-27 15:13:02,584 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:02,584 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:02,584 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>c3d9fab290804649a30ed80001c896f7
+2018-12-27 15:13:02,585 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>2
+2018-12-27 15:13:02,586 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<c3d9fab290804649a30ed80001c896f7
+2018-12-27 15:13:02,586 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 2
+2018-12-27 15:13:02,687 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:02,688 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:02,689 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>4e0e13bb2e454245b338909ad4b77d46
+2018-12-27 15:13:02,689 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>3
+2018-12-27 15:13:02,690 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<4e0e13bb2e454245b338909ad4b77d46
+2018-12-27 15:13:02,690 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 3
+2018-12-27 15:13:02,792 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:02,792 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:02,792 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>ff906863b02c4d989ca4f09ac77188a4
+2018-12-27 15:13:02,793 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>5
+2018-12-27 15:13:02,794 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<ff906863b02c4d989ca4f09ac77188a4
+2018-12-27 15:13:02,794 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 5
+2018-12-27 15:13:02,896 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:02,896 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:02,896 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>c48389017a5548d7b488d4b572e071fd
+2018-12-27 15:13:02,897 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>8
+2018-12-27 15:13:02,898 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<c48389017a5548d7b488d4b572e071fd
+2018-12-27 15:13:02,898 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 8
+2018-12-27 15:13:02,999 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:02,999 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:02,999 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>0d37eb59197b4fb3971760f75750824b
+2018-12-27 15:13:03,000 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>13
+2018-12-27 15:13:03,001 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<0d37eb59197b4fb3971760f75750824b
+2018-12-27 15:13:03,001 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 13
+2018-12-27 15:13:03,102 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:03,102 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:03,102 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>c50f2a1f843345d88883391cd47c0b06
+2018-12-27 15:13:03,103 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>21
+2018-12-27 15:13:03,104 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<c50f2a1f843345d88883391cd47c0b06
+2018-12-27 15:13:03,104 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 21
+2018-12-27 15:13:03,205 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:03,205 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:03,205 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>28ad3b4cf4d84e50b7aaea1f31cf3a47
+2018-12-27 15:13:03,206 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>34
+2018-12-27 15:13:03,207 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<28ad3b4cf4d84e50b7aaea1f31cf3a47
+2018-12-27 15:13:03,207 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 34
+2018-12-27 15:13:03,308 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:03,308 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:03,308 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>24487277bca042c9bd6a2f8daa9dc395
+2018-12-27 15:13:03,309 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>55
+2018-12-27 15:13:03,310 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<24487277bca042c9bd6a2f8daa9dc395
+2018-12-27 15:13:03,310 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 55
+2018-12-27 15:13:03,411 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:03,411 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:03,411 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>a005b7c1a7f444c7a397e0376a73c3c8
+2018-12-27 15:13:03,412 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>89
+2018-12-27 15:13:03,413 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<a005b7c1a7f444c7a397e0376a73c3c8
+2018-12-27 15:13:03,413 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 89
+2018-12-27 15:13:03,514 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:03,519 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:03,519 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>fe60ce51c0bc44d8b337921e79a68e25
+2018-12-27 15:13:03,520 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>144
+2018-12-27 15:13:03,522 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<fe60ce51c0bc44d8b337921e79a68e25
+2018-12-27 15:13:03,522 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 144
+2018-12-27 15:13:03,624 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:03,624 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:03,624 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>64b14158fe524e25bce1ba17613271b3
+2018-12-27 15:13:03,625 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>233
+2018-12-27 15:13:03,626 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<64b14158fe524e25bce1ba17613271b3
+2018-12-27 15:13:03,626 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 233
+2018-12-27 15:13:03,726 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:03,726 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:03,726 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>ce9157a51303490aa18f613af14fa5db
+2018-12-27 15:13:03,727 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>377
+2018-12-27 15:13:03,728 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<ce9157a51303490aa18f613af14fa5db
+2018-12-27 15:13:03,728 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 377
+2018-12-27 15:13:03,829 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:03,829 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:03,829 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>3be14f4a3c61411f9ac6da46f2419e5b
+2018-12-27 15:13:03,830 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>610
+2018-12-27 15:13:03,831 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<3be14f4a3c61411f9ac6da46f2419e5b
+2018-12-27 15:13:03,831 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 610
+2018-12-27 15:13:03,932 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:03,932 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:03,932 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>aed57c01d3ee427396ff8ac4abe494d6
+2018-12-27 15:13:03,933 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>987
+2018-12-27 15:13:03,934 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<aed57c01d3ee427396ff8ac4abe494d6
+2018-12-27 15:13:03,934 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 987
+2018-12-27 15:13:04,035 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:04,035 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:04,035 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>7522a2f770754f4c875014f675145ac8
+2018-12-27 15:13:04,038 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>1597
+2018-12-27 15:13:04,039 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<7522a2f770754f4c875014f675145ac8
+2018-12-27 15:13:04,039 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 1597
+2018-12-27 15:13:04,140 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:04,140 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:04,140 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>e01aa138fc4c4d928d12809181e641f3
+2018-12-27 15:13:04,141 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>2584
+2018-12-27 15:13:04,142 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<e01aa138fc4c4d928d12809181e641f3
+2018-12-27 15:13:04,142 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 2584
+2018-12-27 15:13:04,243 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:04,244 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:04,244 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>5127c99f7a9143aaa686474b1b2bfe67
+2018-12-27 15:13:04,245 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>4181
+2018-12-27 15:13:04,245 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<5127c99f7a9143aaa686474b1b2bfe67
+2018-12-27 15:13:04,245 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 4181
+2018-12-27 15:13:04,347 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:04,347 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:04,347 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>9ff74f69941842608ee88bebf00198cc
+2018-12-27 15:13:04,348 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>6765
+2018-12-27 15:13:04,349 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<9ff74f69941842608ee88bebf00198cc
+2018-12-27 15:13:04,349 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 6765
+2018-12-27 15:13:04,450 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:04,450 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:04,450 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>e4cbe2c1082e416288078f75f1b09df6
+2018-12-27 15:13:04,451 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>10946
+2018-12-27 15:13:04,451 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<e4cbe2c1082e416288078f75f1b09df6
+2018-12-27 15:13:04,452 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 10946
+2018-12-27 15:13:04,553 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:04,553 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:04,553 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>5b7169077ba249b9bf1f905240bf689c
+2018-12-27 15:13:04,554 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>17711
+2018-12-27 15:13:04,555 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<5b7169077ba249b9bf1f905240bf689c
+2018-12-27 15:13:04,555 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 17711
+2018-12-27 15:13:04,656 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:04,657 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:04,657 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>054aa5c1e58243b1a6f32f70a097aaf2
+2018-12-27 15:13:04,657 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>28657
+2018-12-27 15:13:04,658 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<054aa5c1e58243b1a6f32f70a097aaf2
+2018-12-27 15:13:04,658 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 28657
+2018-12-27 15:13:04,759 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:04,759 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:04,759 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>821af665263e4e2aaaaadfe52d0bafad
+2018-12-27 15:13:04,760 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>46368
+2018-12-27 15:13:04,761 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<821af665263e4e2aaaaadfe52d0bafad
+2018-12-27 15:13:04,761 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 46368
+2018-12-27 15:13:04,863 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:04,863 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:04,863 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>9ff0d1e60d724768b347571f15e6c951
+2018-12-27 15:13:04,864 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>75025
+2018-12-27 15:13:04,865 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<9ff0d1e60d724768b347571f15e6c951
+2018-12-27 15:13:04,865 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 75025
+2018-12-27 15:13:04,966 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:04,966 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:04,966 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>d7e8d2a2e167429cad2ebe158a7c4f8a
+2018-12-27 15:13:04,967 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>121393
+2018-12-27 15:13:04,968 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<d7e8d2a2e167429cad2ebe158a7c4f8a
+2018-12-27 15:13:04,968 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 121393
+2018-12-27 15:13:05,069 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:05,069 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:05,069 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>7f66928063d841f2b91df2dcf1fd688b
+2018-12-27 15:13:05,070 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>196418
+2018-12-27 15:13:05,071 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<7f66928063d841f2b91df2dcf1fd688b
+2018-12-27 15:13:05,071 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 196418
+2018-12-27 15:13:05,172 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:05,172 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:05,172 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>05e860a0a1e7484c984301ce7475e728
+2018-12-27 15:13:05,173 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>317811
+2018-12-27 15:13:05,174 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<05e860a0a1e7484c984301ce7475e728
+2018-12-27 15:13:05,174 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 317811
+2018-12-27 15:13:05,275 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:05,275 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:05,275 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>6b0695494c4a4c54b27fab86568db00e
+2018-12-27 15:13:05,276 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>514229
+2018-12-27 15:13:05,277 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<6b0695494c4a4c54b27fab86568db00e
+2018-12-27 15:13:05,277 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 514229
+2018-12-27 15:13:05,378 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - client.send(fib, n)
+2018-12-27 15:13:05,378 [main] [com.cscecee.basesite.core.udp.client.UdpClient] [INFO] - future.get() .......
+2018-12-27 15:13:05,378 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - send reqid >>>>>9cbb2a063b4b48d4bf76685ab23668b0
+2018-12-27 15:13:05,379 [rpc-0] [com.cscecee.basesite.core.udp.test.server.FibRequestHandler] [INFO] - send fib_res>>>>>832040
+2018-12-27 15:13:05,379 [nioEventLoopGroup-2-1] [com.cscecee.basesite.core.udp.client.UdpClientHandler] [INFO] - recieve reqid <<<<<9cbb2a063b4b48d4bf76685ab23668b0
+2018-12-27 15:13:05,380 [main] [com.cscecee.basesite.core.udp.test.client.TestUdpClient] [INFO] - get result = 832040

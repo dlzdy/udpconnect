@@ -37,9 +37,12 @@ public class RpcFuture<T> implements Future<T> {
 		latch.countDown();
 	}
 
+	/**
+	 * 等待10秒超时时间
+	 */
 	@Override
 	public T get() throws InterruptedException, ExecutionException {
-		latch.await();
+		latch.await(10, TimeUnit.SECONDS);
 		if (error != null) {
 			throw new ExecutionException(error);
 		}

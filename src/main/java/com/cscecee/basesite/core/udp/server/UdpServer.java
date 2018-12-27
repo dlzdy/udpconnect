@@ -36,7 +36,7 @@ public class UdpServer {
 	/*
 	 * 注册服务的快捷方式
 	 */
-	public void register(String type,  IMessageHandler<?> handler) {
+	public void register(String type,  IMessageHandler handler) {
 		handlers.register(type, handler);
 	}
 	

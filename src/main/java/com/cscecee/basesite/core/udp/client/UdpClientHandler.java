@@ -3,6 +3,8 @@ package com.cscecee.basesite.core.udp.client;
 import java.net.InetSocketAddress;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy;
@@ -21,6 +23,7 @@ import com.cscecee.basesite.core.udp.test.ExpResponse;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
@@ -37,13 +40,14 @@ public class UdpClientHandler extends SimpleChannelInboundHandler<DatagramPacket
 	// 业务线程池
 	private ThreadPoolExecutor executor;
 
-	private MessageHandlers handlers;
+	private UdpClient udpClient;
 	
-	InetSocketAddress inetSocketAddress;
-	
-	public UdpClientHandler(InetSocketAddress inetSocketAddress, MessageHandlers handlers, int workerThreads) {
-		this.inetSocketAddress = inetSocketAddress;
-		System.out.println("=========2=============" + "MessageCollector.构造");
+	private ConcurrentMap<String, RpcFuture<?>> pendingTasks = new ConcurrentHashMap<>();
+
+	private Throwable ConnectionClosed = new Exception("rpc connection not active error");
+
+	public UdpClientHandler(UdpClient udpClient, int workerThreads) {
+		this.udpClient = udpClient;
 		// 业务队列最大1000,避免堆积
 		// 如果子线程处理不过来,io线程也会加入业务逻辑(callerRunsPolicy)
 		BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(1000);
@@ -60,11 +64,12 @@ public class UdpClientHandler extends SimpleChannelInboundHandler<DatagramPacket
 
 		};
 		// 闲置时间超过30秒的线程就自动销毁
-		this.executor = new ThreadPoolExecutor(1, workerThreads, 30, TimeUnit.SECONDS, queue, factory,
+		this.executor = new ThreadPoolExecutor(1, workerThreads, 5, TimeUnit.SECONDS, queue, factory,
 				new CallerRunsPolicy());
-		this.handlers = handlers;
-		//this.registry = registry;
 	}
+
+
+
 
 
 	// public void closeGracefully() {
@@ -79,35 +84,44 @@ public class UdpClientHandler extends SimpleChannelInboundHandler<DatagramPacket
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket datagramPacket) throws Exception {
 		try {
-			// 用业务线程处理消息
-			this.executor.execute(() -> {
-				this.handleMessage(ctx, datagramPacket);
-			});
+			InetSocketAddress sender = datagramPacket.sender();
+			ByteBuf in = datagramPacket.content();
+			String fromId = readStr(in);//fromId
+			String requestId = readStr(in);//requestId
+			String type = readStr(in);//type
+			String payload = readStr(in);//TODO byte[]
+			
+			logger.info("recieve reqid <<<<<" + requestId);
+
+			RpcFuture<Object> future = (RpcFuture<Object>) pendingTasks.remove(requestId);
+			if (future == null) {//没找到对应的reqId
+				if ("0".equals(fromId) || "".equals(fromId) ) {//从服务器发来的请求消息
+					final CommonMessage messageInput = new CommonMessage(fromId, requestId, type, payload);
+					this.executor.execute(() -> {
+						this.handleMessage(ctx, sender, messageInput);
+					});
+				}else {
+					logger.error("future not found with type {}", type);
+					return;
+				}
+			}else {
+				future.success(payload);
+			}
 
 		} catch (Exception e) {
 			logger.error("failed", e);
 		}
 	}
 	
-	private void handleMessage(ChannelHandlerContext ctx, DatagramPacket datagramPacket) {
+	private void handleMessage(ChannelHandlerContext ctx, InetSocketAddress sender, CommonMessage messageInput) {
 		// 业务逻辑在这里
-		InetSocketAddress sender = datagramPacket.sender();
-		ByteBuf in = datagramPacket.content();
-		String fromId = readStr(in);
-		String requestId = readStr(in);
-		String type = readStr(in);
-		String payload = readStr(in);//TODO byte[]
-		final CommonMessage messageInput = new CommonMessage(fromId, requestId, type, payload);
 		
-		//Object payload = input.getPayload();
-		//这里有问题
-		@SuppressWarnings("unchecked")
-		IMessageHandler<Object> handler = (IMessageHandler<Object>) handlers.get(type);
+		IMessageHandler handler = udpClient.getHandlers().get(messageInput.getType());
 		if (handler != null) {
-			handler.handle(ctx, sender, requestId, payload);
+			handler.handle(ctx, sender, messageInput.getRequestId(),  messageInput.getPayload());
 		} else {
 			//handlers.defaultHandler().handle(ctx, input.getRequestId(), input);
-			logger.error("not found handler of " + type);
+			logger.error("not found handler of " + messageInput.getType());
 		}
 	}
 	private String readStr(ByteBuf in) {
@@ -126,26 +140,33 @@ public class UdpClientHandler extends SimpleChannelInboundHandler<DatagramPacket
 		logger.error(cause.getMessage(), cause);
 	}
 
-
+	/**
+	 * 发送消息
+	 * @param output
+	 * @return
+	 */
 	public <T> RpcFuture<T> send(CommonMessage output) {
 		RpcFuture<T> future = new RpcFuture<T>();
 
 		
 		ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
-		String fromId = "0";
-		writeStr(buf, output.getFromId() );
-		writeStr(buf, output.getRequestId());
-		writeStr(buf, output.getType());//****
-		writeStr(buf, JSON.toJSONString(output.getPayload()));
+		writeStr(buf, output.getFromId() );// fromId
+		writeStr(buf, output.getRequestId());// requestId
+		writeStr(buf, output.getType());//type
+		writeStr(buf, JSON.toJSONString(output.getPayload()));//payload
 		//ctx.writeAndFlush(new DatagramPacket(buf, sender));
-//		if (channel != null) {
-//		channel.eventLoop().execute(() -> {
-//			pendingTasks.put(output.getRequestId(), future);
-//			channel.writeAndFlush(output);
-//		});
-//	} else {
-//		future.fail(ConnectionClosed);
-//	}		
+		Channel channel = udpClient.getChannel();
+		if (channel != null) {
+			channel.eventLoop().execute(() -> {
+				pendingTasks.put(output.getRequestId(), future);
+				// datasocket
+				logger.info("send reqid >>>>>" + output.getRequestId());
+				channel.writeAndFlush(new DatagramPacket(buf, udpClient.getRemoteSocketAddress()));
+				
+			});
+		} else {
+			future.fail(ConnectionClosed);
+		}		
 		return future;
 	}
 	
