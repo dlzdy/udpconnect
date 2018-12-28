@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import com.cscecee.basesite.core.udp.common.IMessageHandler;
 import com.cscecee.basesite.core.udp.common.MessageHandlers;
-import com.cscecee.basesite.core.udp.common.UdpEndPoint;
 import com.cscecee.basesite.core.udp.common.UdpMessageHandler;
 
 import io.netty.bootstrap.Bootstrap;
@@ -18,9 +17,9 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 
 
-public class UdpServer extends UdpEndPoint {
+public class UdpServer333 {
 
-	private final static Logger logger = LoggerFactory.getLogger(UdpServer.class);
+	private final static Logger logger = LoggerFactory.getLogger(UdpServer333.class);
 	// 服务器端口
 	private int port;
 
@@ -32,7 +31,7 @@ public class UdpServer extends UdpEndPoint {
 
 	private MessageHandlers handlers = new MessageHandlers();
 	
-	public UdpServer(int port) {
+	public UdpServer333(int port) {
 		this.port = port;
 	}
 	/*

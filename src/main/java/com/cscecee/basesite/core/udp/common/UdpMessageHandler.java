@@ -1,6 +1,7 @@
 package com.cscecee.basesite.core.udp.common;
 
 import java.net.InetSocketAddress;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -42,8 +43,8 @@ public class UdpMessageHandler extends SimpleChannelInboundHandler<DatagramPacke
 	// 业务线程池
 	private ThreadPoolExecutor executor;
 	private MessageHandlers handlers;
-	
-	private ConcurrentMap<String, Map<String, String>> clients = new ConcurrentHashMap<>();
+	//ip,port,time=long
+	private ConcurrentMap<String, Map<String, String>> peersMap = new ConcurrentHashMap<>();
 
 	private ConcurrentMap<String, RpcFuture<?>> pendingTasks = new ConcurrentHashMap<>();
 
@@ -117,7 +118,7 @@ public class UdpMessageHandler extends SimpleChannelInboundHandler<DatagramPacke
 					clientMap.put("port", sender.getPort() + "");
 					clientMap.put("time", System.currentTimeMillis() + "");
 					
-					clients.put(fromId, clientMap);
+					peersMap.put(fromId, clientMap);//放入缓存，记录对端的ip，port
 					messageInput = new MessageReq(requestId, fromId, command, isCompressed, data);
 				}
 				this.handleMessage(ctx, sender, messageInput);
@@ -155,25 +156,39 @@ public class UdpMessageHandler extends SimpleChannelInboundHandler<DatagramPacke
 		logger.error(cause.getMessage(), cause);
 	}
 
-	//客户端
-	public <T> RpcFuture<T> send(String clientId, MessageReq msgReq) {
-		
+	/**
+	 * 发送消息,服务器端-->客户端
+	 * 因为客户端可能是局域网，不能指定ip
+	 * @param peerId
+	 * @param msgReq
+	 * @return
+	 */
+	public <T> RpcFuture<T> send(String peerId, MessageReq msgReq) {
+		Map<String, String> peerMap = peersMap.get(peerId);
+		RpcFuture<T> future = new RpcFuture<T>();
+		if (peerMap == null || peerMap.size() == 0) {
+			future.fail(ConnectionClosed);
+			return future;
+		}
+		String ip = peerMap.get("ip");
+		int port = Integer.valueOf(peerMap.get("port"));
+		long time = Long.valueOf(peerMap.get("time"));
+		if (System.currentTimeMillis() - time > 30000 ) {
+			future.fail(ConnectionClosed);
+			return future;
+		}
+		InetSocketAddress remoteSocketAddress = new InetSocketAddress(ip, port);
+		return send(remoteSocketAddress, msgReq);
 	}
 	/**
-	 * 发送消息,客户端、服务器端都会使用
+	 * 通用
+	 * 发送消息,客户端-->服务器端
 	 * @param msgReq
 	 * @return
 	 */
 	public <T> RpcFuture<T> send(InetSocketAddress remoteSocketAddress, MessageReq msgReq) {
 		RpcFuture<T> future = new RpcFuture<T>();
 
-//		 * 通用消息，
-//		 * requestId string
-//		 * isRsp byte
-//		 * fromId string
-//		 * command string
-//		 * isCompressed byte
-//		 * data byte[]		
 		ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
 		writeStr(buf, msgReq.getRequestId());// requestId
 		buf.writeBoolean(msgReq.getIsRsp());// isRsp

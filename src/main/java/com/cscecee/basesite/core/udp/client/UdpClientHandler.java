@@ -46,6 +46,12 @@ public class UdpClientHandler extends SimpleChannelInboundHandler<DatagramPacket
 
 	private Throwable ConnectionClosed = new Exception("rpc connection not active error");
 
+	@Override
+	protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 //	public UdpClientHandler(UdpClient udpClient, int workerThreads) {
 //		this.udpClient = udpClient;
 //		// 业务队列最大1000,避免堆积

@@ -1,13 +1,13 @@
 package com.cscecee.basesite.core.udp.test.server;
 
-import com.cscecee.basesite.core.udp.server.UdpServer;
+import com.cscecee.basesite.core.udp.server.UdpServer333;
 
 
 
 public class TestUdpServer {
 
-	UdpServer server;
-	public TestUdpServer(UdpServer server ) {
+	UdpServer333 server;
+	public TestUdpServer(UdpServer333 server ) {
 		this.server = server;
 	}
 //	public Object time() {
@@ -15,7 +15,7 @@ public class TestUdpServer {
 //		return  result ;
 //	}
 	public static void main(String[] args) {
-		UdpServer server = new UdpServer(8800);
+		UdpServer333 server = new UdpServer333(8800);
 		server.register("fib", new FibRequestHandler());
 		server.register("exp", new ExpRequestHandler());
 		TestUdpServer testServer = new TestUdpServer(server);
