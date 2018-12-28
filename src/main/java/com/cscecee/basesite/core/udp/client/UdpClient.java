@@ -28,17 +28,11 @@ import lianxi.tcp.client.RpcFuture;
 import lianxi.tcp.common.RequestId;
 
 public class UdpClient extends UdpEndPoint {
-
-//	 private String serverName;
-//	 // 服务器端口
-//	 private int serverPort;
 	 
 	 private InetSocketAddress remoteSocketAddress = null;
 	 
 	 public UdpClient(String serverName, int serverPort, String myId) {
 		 remoteSocketAddress = new InetSocketAddress(serverName, serverPort);
-//		 this.serverName = serverName;
-//		 this.serverPort = serverPort;
 		 this.myId = myId;
 		 this.init();
 	 }
@@ -250,7 +244,7 @@ public class UdpClient extends UdpEndPoint {
 			}
 		}
 		MessageReq output = new MessageReq(RequestId.next(), myId, command, isCompressed, data);
-		return clientHandler.send(getRemoteSocketAddress(), output);
+		return udpMessageHandler.send(getRemoteSocketAddress(), output);
 	}
 
 	/**
