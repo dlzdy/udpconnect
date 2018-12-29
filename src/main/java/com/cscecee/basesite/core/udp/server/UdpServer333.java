@@ -42,39 +42,39 @@ public class UdpServer333 {
 	}
 	
 	public void start() {
-		eventLoopGroup = new NioEventLoopGroup();
-		bootstrap = new Bootstrap();
-		// 1.设置bossGroup和workGroup
-		bootstrap.group(eventLoopGroup);
-		// 2.指定使用NioServerSocketChannel来处理连接请求。
-		bootstrap.channel(NioDatagramChannel.class);
-		// 3.配置TCP/UDP参数。
-		//bootstrap.option(ChannelOption.SO_BROADCAST, true);
-		//serverHandler = new UdpServerHandler(handlers ,10);
-		serverHandler = new UdpMessageHandler(handlers ,10);
-		// 4.配置handler 数据处理器。
-		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
-			@Override
-			protected void initChannel(NioDatagramChannel ch) throws Exception {
-				// 注册hander
-				ChannelPipeline pipe = ch.pipeline();
-				pipe.addLast(serverHandler);
-			}
-
-		});
-
-		// 5.bootstrap启动服务器。
-		try {
-			ChannelFuture sync = bootstrap.bind(port).sync();
-			logger.info("udp server is running ......");
-			channel = sync.channel();
-			serverHandler.setChannel(channel);//*****
-			channel.closeFuture().await();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} finally {
-			eventLoopGroup.shutdownGracefully();
-		}		
+//		eventLoopGroup = new NioEventLoopGroup();
+//		bootstrap = new Bootstrap();
+//		// 1.设置bossGroup和workGroup
+//		bootstrap.group(eventLoopGroup);
+//		// 2.指定使用NioServerSocketChannel来处理连接请求。
+//		bootstrap.channel(NioDatagramChannel.class);
+//		// 3.配置TCP/UDP参数。
+//		//bootstrap.option(ChannelOption.SO_BROADCAST, true);
+//		//serverHandler = new UdpServerHandler(handlers ,10);
+//		serverHandler = new UdpMessageHandler(handlers ,10);
+//		// 4.配置handler 数据处理器。
+//		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
+//			@Override
+//			protected void initChannel(NioDatagramChannel ch) throws Exception {
+//				// 注册hander
+//				ChannelPipeline pipe = ch.pipeline();
+//				pipe.addLast(serverHandler);
+//			}
+//
+//		});
+//
+//		// 5.bootstrap启动服务器。
+//		try {
+//			ChannelFuture sync = bootstrap.bind(port).sync();
+//			logger.info("udp server is running ......");
+//			channel = sync.channel();
+//			serverHandler.setChannel(channel);//*****
+//			channel.closeFuture().await();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		} finally {
+//			eventLoopGroup.shutdownGracefully();
+//		}		
 	}
 
 }

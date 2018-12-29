@@ -39,25 +39,25 @@ import lianxi.tcp.client.RpcFuture;
 public class UdpMessageHandler extends SimpleChannelInboundHandler<DatagramPacket> {
 
 	private final static Logger logger = LoggerFactory.getLogger(UdpMessageHandler.class);
-	private Channel channel;
+	
 	// 业务线程池
 	private ThreadPoolExecutor executor;
-	private MessageHandlers handlers;
-	//ip,port,time=long
+	
+	private UdpEndPoint udpEndPoint;
+
 	private ConcurrentMap<String, Map<String, String>> peersMap = new ConcurrentHashMap<>();
 
 	private ConcurrentMap<String, RpcFuture<?>> pendingTasks = new ConcurrentHashMap<>();
 
 	private Throwable ConnectionClosed = new Exception("rpc connection not active error");
 	
-	public UdpMessageHandler(MessageHandlers handlers, int workerThreads) {
+	public UdpMessageHandler(UdpEndPoint udpEndPoint, int workerThreads) {
 		// 业务队列最大1000,避免堆积
 		// 如果子线程处理不过来,io线程也会加入业务逻辑(callerRunsPolicy)
 		BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(1000);
 		// 给业务线程命名
 		ThreadFactory factory = new ThreadFactory() {
 			AtomicInteger seq = new AtomicInteger();
-
 			@Override
 			public Thread newThread(Runnable r) {
 				Thread t = new Thread(r);
@@ -65,20 +65,15 @@ public class UdpMessageHandler extends SimpleChannelInboundHandler<DatagramPacke
 				logger.info("new rpc thread:" + t.getName());
 				return t;
 			}
-
 		};
 		// 闲置时间超过30秒的线程就自动销毁
 		this.executor = new ThreadPoolExecutor(1, workerThreads, 30, TimeUnit.SECONDS, queue, factory,
 				new CallerRunsPolicy());
-		this.handlers = handlers;
+		this.udpEndPoint = udpEndPoint;
 	}
 
 	public Channel getChannel() {
-		return channel;
-	}
-
-	public void setChannel(Channel channel) {
-		this.channel = channel;
+		return udpEndPoint.getChannel();
 	}
 
 	public void closeGracefully() {
@@ -132,7 +127,7 @@ public class UdpMessageHandler extends SimpleChannelInboundHandler<DatagramPacke
 	private void handleMessage(ChannelHandlerContext ctx, InetSocketAddress sender, MessageCommon messageInput) {
 		// 业务逻辑在这里
 		
-		IMessageHandler handler = handlers.get(messageInput.getCommand());
+		IMessageHandler handler = udpEndPoint.getHandlers().get(messageInput.getCommand());
 		if (handler != null) {
 			handler.handle(ctx, sender, messageInput.getRequestId(),  messageInput.getData());
 		} else {
@@ -198,12 +193,12 @@ public class UdpMessageHandler extends SimpleChannelInboundHandler<DatagramPacke
 		buf.writeInt(msgReq.getData().length);
 		buf.writeBytes(msgReq.getData());//data
 		//ctx.writeAndFlush(new DatagramPacket(buf, sender));
-		if (channel != null) {
-			channel.eventLoop().execute(() -> {
+		if (getChannel() != null) {
+			getChannel().eventLoop().execute(() -> {
 				pendingTasks.put(msgReq.getRequestId(), future);
 				// datasocket
 				logger.debug("send reqId >>>>>" + msgReq.getRequestId());
-				channel.writeAndFlush(new DatagramPacket(buf, remoteSocketAddress));
+				getChannel().writeAndFlush(new DatagramPacket(buf, remoteSocketAddress));
 				
 			});
 		} else {

@@ -28,20 +28,47 @@ import lianxi.tcp.client.RpcFuture;
 import lianxi.tcp.common.RequestId;
 
 public class UdpClient extends UdpEndPoint {
+	
 	private final static Logger logger = LoggerFactory.getLogger(UdpClient.class);
 
 	private InetSocketAddress remoteSocketAddress = null;
 
-	public UdpClient(String serverName, int serverPort, String myId) {
+	protected boolean started = false;
+
+	private int localPort;
+
+	public UdpClient(String serverName, int serverPort, int localPort, String myId) throws Exception {
 		remoteSocketAddress = new InetSocketAddress(serverName, serverPort);
+		this.localPort = localPort;
 		this.myId = myId;
 		this.init();
+//		//启动服务端口
+//		try {
+//			this.bind(getPort());
+//			started = true;
+//		} catch (Exception e) {
+//			started = false;
+//			throw e;
+//		}
 	}
 
 	public InetSocketAddress getRemoteSocketAddress() {
 		return remoteSocketAddress;
 	}
 
+	/**
+	 * 绑定端口, 客户端绑定0
+	 * @throws Exception 
+	 */
+	public void bind() throws Exception {
+		if (channel == null || !channel.isActive()) {
+			ChannelFuture channelFuture = bootstrap.bind(getPort()).sync();
+			channel = channelFuture.channel();
+			logger.info("client localAddress = " +  channel.localAddress());
+			started = true;
+		}
+	}
+	
 	/**
 	 * 适用于客户端-->服务器
 	 * 
@@ -66,15 +93,10 @@ public class UdpClient extends UdpEndPoint {
 	 * @return
 	 */
 	private <T> RpcFuture<T> sendAsync(String command, boolean isCompressed, byte[] data) {
-		if (!started) {// 未连接
-			try {
-				bind(0);
-				started = true;
-			} catch (Exception e) {
-				e.printStackTrace();
-				started = false;
-			}
+		if (channel == null || !channel.isActive()) {
+			throw new RPCException(" channel is not active");
 		}
+		
 		MessageReq output = new MessageReq(RequestId.next(), myId, command, isCompressed, data);
 		return udpMessageHandler.send(getRemoteSocketAddress(), output);
 	}
@@ -94,5 +116,10 @@ public class UdpClient extends UdpEndPoint {
 		// }
 		// logger.error("connect {}:{} failure", ip, port, future.cause());
 		// });
+	}
+
+	@Override
+	public int getPort() {
+		return this.localPort;
 	}
 }

@@ -1,24 +1,17 @@
 package com.cscecee.basesite.core.udp.common;
 
-import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cscecee.basesite.core.udp.common.IMessageHandler;
-import com.cscecee.basesite.core.udp.common.MessageHandlers;
-import com.cscecee.basesite.core.udp.common.UdpMessageHandler;
-
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
-import lianxi.tcp.client.RpcFuture;
 
 
 public abstract class UdpEndPoint {
@@ -33,10 +26,6 @@ public abstract class UdpEndPoint {
 	protected EventLoopGroup eventLoopGroup;
 	//
 	protected Channel channel;
-
-	protected boolean started = false;
-
-	protected boolean stopped;
 
 	protected UdpMessageHandler udpMessageHandler;
 	
@@ -60,7 +49,7 @@ public abstract class UdpEndPoint {
 		handlers.register(type, handler);
 	}
 
-	public void init() {
+	public void init() throws Exception {
 		bootstrap = new Bootstrap();
 		// 1.设置bossGroup和workGroup
 		eventLoopGroup = new NioEventLoopGroup();
@@ -69,7 +58,7 @@ public abstract class UdpEndPoint {
 		bootstrap.channel(NioDatagramChannel.class);
 		// 3.配置TCP/UDP参数。
 		// 4.配置handler和childHandler，数据处理器。
-		udpMessageHandler =  new UdpMessageHandler(handlers ,10);
+		udpMessageHandler =  new UdpMessageHandler(this,10);
 		
 		// bootstrap.handler(new LoggingHandler(LogLevel.INFO));
 		bootstrap.handler(new ChannelInitializer<NioDatagramChannel>() {
@@ -83,9 +72,10 @@ public abstract class UdpEndPoint {
 			}
 
 		});
-
 	}
+	public abstract int getPort() ;
 
+	public abstract void bind() throws Exception;
 	/**
 	 * 异步发送
 	 * 
@@ -108,23 +98,7 @@ public abstract class UdpEndPoint {
 //		return udpMessageHandler.send(output);
 //	}
 
-	/**
-	 * 绑定端口, 客户端绑定0
-	 * @throws Exception 
-	 */
-	public void bind(int port) throws Exception {
-		try {
-			if (channel == null || !channel.isActive()) {
-				ChannelFuture channelFuture = bootstrap.bind(port).sync();
-				channel = channelFuture.channel();
-				channel.closeFuture().await();
-			}
-		} catch (Exception e) {
-			logger.error("failed", e);
-		} finally {
-			eventLoopGroup.shutdownGracefully();
-		}
-	}
+
 	/**
 	 * 适用于客户端-->服务器
 	 * @param type
@@ -162,7 +136,6 @@ public abstract class UdpEndPoint {
 	 * 关闭
 	 */
 	public void close() {
-		stopped = true;
 		channel.close();
 		eventLoopGroup.shutdownGracefully(0, 5000, TimeUnit.MILLISECONDS);
 	}

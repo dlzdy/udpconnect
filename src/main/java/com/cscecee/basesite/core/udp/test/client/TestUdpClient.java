@@ -21,7 +21,7 @@ public class TestUdpClient {
 
 	public TestUdpClient(UdpClient client) {
 		this.client = client;
-		this.client.register("time", new TimeRequestHandler());
+//		this.client.register("time", new TimeRequestHandler());
 
 	}
 	public Object fib(int n) {
@@ -38,8 +38,9 @@ public class TestUdpClient {
 //RPC客户端要链接远程IP端口，并注册服务输出类(RPC响应类)，
 // 然后分别调用20次斐波那契服务和指数服务，输出结果
 
-	public static void main(String[] args) throws InterruptedException {
-		UdpClient client = new UdpClient("localhost", 8800, UUID.randomUUID().toString().replaceAll("-", ""));
+	public static void main(String[] args) throws Exception {
+		UdpClient client = new UdpClient("localhost", 8800, 0, UUID.randomUUID().toString().replaceAll("-", ""));
+		client.bind();
 		TestUdpClient testClient = new TestUdpClient(client);
 
 		for (int i = 0; i < 30; i++) {
@@ -50,22 +51,21 @@ public class TestUdpClient {
 				i--; // retry
 			}
 		}
-		Thread.sleep(3000);
-		for (int i = 0; i < 30; i++) {
-			try {
-				String strJsonObj = testClient.exp(2, i) + "";
-				ExpResponse expResp = JSON.parseObject(strJsonObj, ExpResponse.class);
-				if (expResp != null) {
-					System.out.printf("exp2(%d) = %d cost=%dns\n", i, expResp.getValue(), expResp.getCostInNanos());
-				}else {
-					System.err.println("null");
-				}
-				Thread.sleep(100);
-			} catch (RPCException e) {
-				i--; // retry
-			}
-		}
-
+//		Thread.sleep(3000);
+//		for (int i = 0; i < 30; i++) {
+//			try {
+//				String strJsonObj = testClient.exp(2, i) + "";
+//				ExpResponse expResp = JSON.parseObject(strJsonObj, ExpResponse.class);
+//				if (expResp != null) {
+//					System.out.printf("exp2(%d) = %d cost=%dns\n", i, expResp.getValue(), expResp.getCostInNanos());
+//				}else {
+//					System.err.println("null");
+//				}
+//				Thread.sleep(100);
+//			} catch (RPCException e) {
+//				i--; // retry
+//			}
+//		}
 		client.close();
 	}
 }
