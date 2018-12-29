@@ -30,7 +30,7 @@ public abstract class UdpEndPoint {
 	//
 	protected Bootstrap bootstrap;
 	//
-	protected EventLoopGroup group;
+	protected EventLoopGroup eventLoopGroup;
 	//
 	protected Channel channel;
 
@@ -49,8 +49,6 @@ public abstract class UdpEndPoint {
 		return channel;
 	}
 
-
-	
 	public MessageHandlers getHandlers() {
 		return handlers;
 	}
@@ -65,8 +63,8 @@ public abstract class UdpEndPoint {
 	public void init() {
 		bootstrap = new Bootstrap();
 		// 1.设置bossGroup和workGroup
-		group = new NioEventLoopGroup();
-		bootstrap.group(group);
+		eventLoopGroup = new NioEventLoopGroup();
+		bootstrap.group(eventLoopGroup);
 		// 2.指定使用NioServerSocketChannel来处理连接请求。
 		bootstrap.channel(NioDatagramChannel.class);
 		// 3.配置TCP/UDP参数。
@@ -95,41 +93,52 @@ public abstract class UdpEndPoint {
 	 * @param payload
 	 * @return
 	 */
-	private <T> RpcFuture<T> sendAsync(String command, boolean isCompressed, byte[] data) {
-		if (!started) {//未连接
-			try {
-				bind();
-				started = true;
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				started = false;
-			}
-		}
-		String requestId = RequestId.next();
-		MessageReq output = new MessageReq(requestId, myId, command, isCompressed, data);
-		return udpMessageHandler.send(output);
-	}
+//	private <T> RpcFuture<T> sendAsync(String command, boolean isCompressed, byte[] data) {
+//		if (!started) {//未连接
+//			try {
+//				bind();
+//				started = true;
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//				started = false;
+//			}
+//		}
+//		String requestId = RequestId.next();
+//		MessageReq output = new MessageReq(requestId, myId, command, isCompressed, data);
+//		return udpMessageHandler.send(output);
+//	}
 
 	/**
-	 * 绑定端口
+	 * 绑定端口, 客户端绑定0
 	 * @throws Exception 
 	 */
-	public abstract void bind() throws Exception;
-
+	public void bind(int port) throws Exception {
+		try {
+			if (channel == null || !channel.isActive()) {
+				ChannelFuture channelFuture = bootstrap.bind(port).sync();
+				channel = channelFuture.channel();
+				channel.closeFuture().await();
+			}
+		} catch (Exception e) {
+			logger.error("failed", e);
+		} finally {
+			eventLoopGroup.shutdownGracefully();
+		}
+	}
 	/**
 	 * 适用于客户端-->服务器
 	 * @param type
 	 * @param payload
 	 * @return
 	 */
-	public <T> T send(String command, boolean isCompressed, byte[] data) {
-		RpcFuture<T> future = sendAsync(command, isCompressed, data);
-		try {
-			return future.get();
-		} catch (Exception e) {
-			throw new RPCException(e);
-		}
-	}
+//	public <T> T send(String command, boolean isCompressed, byte[] data) {
+//		RpcFuture<T> future = sendAsync(command, isCompressed, data);
+//		try {
+//			return future.get();
+//		} catch (Exception e) {
+//			throw new RPCException(e);
+//		}
+//	}
 
 	/**
 	 * 适用于服务器-->客户端
@@ -139,14 +148,14 @@ public abstract class UdpEndPoint {
 	 * @param data
 	 * @return
 	 */
-	public <T> T send(String peerId, String command, boolean isCompressed, byte[] data) {
-		RpcFuture<T> future = sendAsync(command, isCompressed, data);
-		try {
-			return future.get();
-		} catch (Exception e) {
-			throw new RPCException(e);
-		}
-	}
+//	public <T> T send(String peerId, String command, boolean isCompressed, byte[] data) {
+//		RpcFuture<T> future = sendAsync(command, isCompressed, data);
+//		try {
+//			return future.get();
+//		} catch (Exception e) {
+//			throw new RPCException(e);
+//		}
+//	}
 
 
 	/**
@@ -155,7 +164,7 @@ public abstract class UdpEndPoint {
 	public void close() {
 		stopped = true;
 		channel.close();
-		group.shutdownGracefully(0, 5000, TimeUnit.MILLISECONDS);
+		eventLoopGroup.shutdownGracefully(0, 5000, TimeUnit.MILLISECONDS);
 	}
 
 }
