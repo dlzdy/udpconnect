@@ -101,12 +101,13 @@ public class UdpMessageHandler extends SimpleChannelInboundHandler<DatagramPacke
 			Boolean isCompressed =in.readBoolean();//isCompressed
 			int dataLen = in.readInt();
 			byte[] data = new byte[dataLen];
+			in.readBytes(data);
 			// 用业务线程处理消息
 			this.executor.execute(() -> {
 				MessageCommon messageInput;
 				if (isRsp) {//响应消息
 					messageInput = new MessageRsp(requestId, fromId, command, isCompressed, data);
-				}else {
+				}else {// 请求
 					
 					Map<String, String> clientMap = new HashMap<>();
 					clientMap.put("ip", sender.getAddress().getHostAddress());
@@ -115,8 +116,8 @@ public class UdpMessageHandler extends SimpleChannelInboundHandler<DatagramPacke
 					
 					peersMap.put(fromId, clientMap);//放入缓存，记录对端的ip，port
 					messageInput = new MessageReq(requestId, fromId, command, isCompressed, data);
+					this.handleMessage(ctx, sender, messageInput);
 				}
-				this.handleMessage(ctx, sender, messageInput);
 			});
 
 		} catch (Exception e) {

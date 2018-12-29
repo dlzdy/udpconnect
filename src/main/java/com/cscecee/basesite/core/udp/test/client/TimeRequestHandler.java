@@ -19,7 +19,7 @@ public class TimeRequestHandler implements IMessageHandler {
 	 * payload = time
 	 */
 	@Override
-	public void handle(ChannelHandlerContext ctx, InetSocketAddress sender, String requestId, Object payload) {
+	public void handle(ChannelHandlerContext ctx, InetSocketAddress sender, String requestId, byte[] data) {
 		//响应输出
 		ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
 		String fromId = "0";

@@ -17,9 +17,9 @@ import io.netty.channel.socket.DatagramPacket;
 public class ExpRequestHandler implements IMessageHandler {
 
 	@Override
-	public void handle(ChannelHandlerContext ctx, InetSocketAddress sender, String requestId, Object payload) {
+	public void handle(ChannelHandlerContext ctx, InetSocketAddress sender, String requestId, byte[] data) {
 		// ExpRequest
-		ExpRequest message = JSON.parseObject(payload + "", ExpRequest.class);
+		ExpRequest message = JSON.parseObject(new String(data), ExpRequest.class);
 		int base = message.getBase();
 		int exp = message.getExp();
 		long start = System.nanoTime();

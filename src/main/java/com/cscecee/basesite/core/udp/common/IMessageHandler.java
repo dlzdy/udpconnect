@@ -8,6 +8,6 @@ import io.netty.channel.ChannelHandlerContext;
  */
 public interface IMessageHandler {
 
-	void handle(ChannelHandlerContext ctx, InetSocketAddress sender, String requestId, Object data);
+	void handle(ChannelHandlerContext ctx, InetSocketAddress sender, String requestId, byte[] data);
 
 }

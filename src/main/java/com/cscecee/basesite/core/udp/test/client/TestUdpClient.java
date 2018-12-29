@@ -42,15 +42,15 @@ public class TestUdpClient {
 		UdpClient client = new UdpClient("localhost", 8800, 0, UUID.randomUUID().toString().replaceAll("-", ""));
 		client.bind();
 		TestUdpClient testClient = new TestUdpClient(client);
-
-		for (int i = 0; i < 30; i++) {
-			try {
-				System.out.printf("fib(%d) = %s\n", i, (testClient.fib(i)+""));
-				Thread.sleep(100);
-			} catch (RPCException e) {
-				i--; // retry
-			}
-		}
+		System.out.printf("fib(%d) = %s\n", 2, (testClient.fib(2)+""));
+//		for (int i = 0; i < 30; i++) {
+//			try {
+//				System.out.printf("fib(%d) = %s\n", i, (testClient.fib(i)+""));
+//				Thread.sleep(100);
+//			} catch (RPCException e) {
+//				i--; // retry
+//			}
+//		}
 //		Thread.sleep(3000);
 //		for (int i = 0; i < 30; i++) {
 //			try {

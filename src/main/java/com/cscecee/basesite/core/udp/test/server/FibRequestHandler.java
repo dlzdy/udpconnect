@@ -29,21 +29,32 @@ public class FibRequestHandler implements IMessageHandler {
 	}
 
 	@Override
-	public void handle(ChannelHandlerContext ctx, InetSocketAddress sender, String requestId, Object payload) {
-		int n = Integer.valueOf(payload + "");
+	public void handle(ChannelHandlerContext ctx, InetSocketAddress sender, String requestId, byte[] data) {
+		int n = Integer.valueOf(new String(data));
 		for (int i = fibs.size(); i < n + 1; i++) {
 			long value = fibs.get(i - 2) + fibs.get(i - 1);
 			fibs.add(value);
 		}
 		
+//		this.requestId = requestId;
+//		this.isRsp = isRsp;
+//		this.fromId = fromId;
+//		this.command = command;
+//		this.isCompressed = isCompressed;
+//		this.data = data;
+		
 		ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
-		String fromId = "0";
-		writeStr(buf, fromId );
-		writeStr(buf, requestId);
+		writeStr(buf, requestId);// len+ reqId
+		buf.writeBoolean(true);//isRsp=true
+		writeStr(buf, "0" );//len+fromId
 		writeStr(buf, "fib_res");//****
+		buf.writeBoolean(false);//isCompressed
+		byte[] outData = (fibs.get(n) + "").getBytes(Charsets.UTF8);
+		buf.writeInt(outData.length);// len
+		buf.writeBytes(outData);// data
 		writeStr(buf, fibs.get(n) + "");
 		//响应输出
-		logger.debug("send fib_res>>>>>" + fibs.get(n));
+		logger.info("send fib_res>>>>>" + fibs.get(n));
 		ctx.writeAndFlush(new DatagramPacket(buf, sender));
 	}
 	private void writeStr(ByteBuf buf, String s) {
