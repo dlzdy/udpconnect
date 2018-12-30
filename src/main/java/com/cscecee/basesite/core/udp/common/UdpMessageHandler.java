@@ -1,7 +1,6 @@
 package com.cscecee.basesite.core.udp.common;
 
 import java.net.InetSocketAddress;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -17,13 +16,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cscecee.basesite.core.udp.common.Charsets;
-import com.cscecee.basesite.core.udp.common.MessageCommon;
-import com.cscecee.basesite.core.udp.common.IMessageHandler;
-import com.cscecee.basesite.core.udp.common.MessageHandlers;
-import com.cscecee.basesite.core.udp.common.MessageReq;
-import com.cscecee.basesite.core.udp.common.MessageRsp;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.Channel;
@@ -31,7 +23,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.handler.codec.DecoderException;
-import lianxi.tcp.client.RpcFuture;
+
 
 /**
  * 处理发送消息，接收消息
@@ -47,9 +39,10 @@ public class UdpMessageHandler extends SimpleChannelInboundHandler<DatagramPacke
 
 	private ConcurrentMap<String, Map<String, String>> peersMap = new ConcurrentHashMap<>();
 
-	private ConcurrentMap<String, RpcFuture<?>> pendingTasks = new ConcurrentHashMap<>();
+	private ConcurrentMap<String, RpcFuture> pendingTasks = new ConcurrentHashMap<>();
 
 	private Throwable ConnectionClosed = new Exception("rpc connection not active error");
+	private Throwable NotFoundCommand = new Exception("not found command");
 	
 	public UdpMessageHandler(UdpEndPoint udpEndPoint, int workerThreads) {
 		// 业务队列最大1000,避免堆积
@@ -107,6 +100,13 @@ public class UdpMessageHandler extends SimpleChannelInboundHandler<DatagramPacke
 				MessageCommon messageInput;
 				if (isRsp) {//响应消息
 					messageInput = new MessageRsp(requestId, fromId, command, isCompressed, data);
+					RpcFuture future = (RpcFuture) pendingTasks.remove(messageInput.getRequestId());
+					if (future == null) {
+						logger.error("future not found with command {}", messageInput.getCommand());
+						future.fail(NotFoundCommand);
+						return;
+					}
+					future.success(messageInput.getData());					
 				}else {// 请求
 					
 					Map<String, String> clientMap = new HashMap<>();
@@ -159,9 +159,9 @@ public class UdpMessageHandler extends SimpleChannelInboundHandler<DatagramPacke
 	 * @param msgReq
 	 * @return
 	 */
-	public <T> RpcFuture<T> send(String peerId, MessageReq msgReq) {
+	public RpcFuture send(String peerId, MessageReq msgReq) {
 		Map<String, String> peerMap = peersMap.get(peerId);
-		RpcFuture<T> future = new RpcFuture<T>();
+		RpcFuture future = new RpcFuture();
 		if (peerMap == null || peerMap.size() == 0) {
 			future.fail(ConnectionClosed);
 			return future;
@@ -182,8 +182,8 @@ public class UdpMessageHandler extends SimpleChannelInboundHandler<DatagramPacke
 	 * @param msgReq
 	 * @return
 	 */
-	public <T> RpcFuture<T> send(InetSocketAddress remoteSocketAddress, MessageReq msgReq) {
-		RpcFuture<T> future = new RpcFuture<T>();
+	public  RpcFuture send(InetSocketAddress remoteSocketAddress, MessageReq msgReq) {
+		RpcFuture future = new RpcFuture();
 
 		ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
 		writeStr(buf, msgReq.getRequestId());// requestId

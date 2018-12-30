@@ -1,31 +1,18 @@
 package com.cscecee.basesite.core.udp.client;
 
 import java.net.InetSocketAddress;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cscecee.basesite.core.udp.common.MessageCommon;
-import com.cscecee.basesite.core.udp.common.IMessageHandler;
-import com.cscecee.basesite.core.udp.common.MessageHandlers;
 import com.cscecee.basesite.core.udp.common.MessageReq;
+import com.cscecee.basesite.core.udp.common.RPCException;
+import com.cscecee.basesite.core.udp.common.RequestId;
+import com.cscecee.basesite.core.udp.common.RpcFuture;
 import com.cscecee.basesite.core.udp.common.UdpEndPoint;
-import com.cscecee.basesite.core.udp.common.UdpMessageHandler;
 
-import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioDatagramChannel;
-import lianxi.tcp.client.RPCException;
-import lianxi.tcp.client.RpcFuture;
-import lianxi.tcp.common.RequestId;
+
 
 public class UdpClient extends UdpEndPoint {
 	
@@ -76,8 +63,8 @@ public class UdpClient extends UdpEndPoint {
 	 * @param payload
 	 * @return
 	 */
-	public <T> T send(String command, boolean isCompressed, byte[] data) {
-		RpcFuture<T> future = sendAsync(command, isCompressed, data);
+	public byte[] send(String command, boolean isCompressed, byte[] data) {
+		RpcFuture future = sendAsync(command, isCompressed, data);
 		try {
 			return future.get();
 		} catch (Exception e) {
@@ -92,7 +79,7 @@ public class UdpClient extends UdpEndPoint {
 	 * @param payload
 	 * @return
 	 */
-	private <T> RpcFuture<T> sendAsync(String command, boolean isCompressed, byte[] data) {
+	private RpcFuture sendAsync(String command, boolean isCompressed, byte[] data) {
 		if (channel == null || !channel.isActive()) {
 			throw new RPCException(" channel is not active");
 		}
